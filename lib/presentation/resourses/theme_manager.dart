@@ -5,7 +5,7 @@ import 'styles_manager.dart';
 ThemeData getLightTheme() {
   return ThemeData(
     useMaterial3: true,
-    brightness: Brightness.dark,
+    brightness: Brightness.light,
     scaffoldBackgroundColor: ColorsManager.white,
     primaryColor: ColorsManager.blue,
     hintColor: ColorsManager.white,
@@ -79,9 +79,10 @@ ThemeData getLightTheme() {
       style: ElevatedButton.styleFrom(
         //side: const BorderSide(color: ColorsManager.blue, width: 2),
         elevation: 0,
-        foregroundColor: ColorsManager.blue,
-        backgroundColor: ColorsManager.white,
-        textStyle: Styles.style20Bold(),
+        padding: EdgeInsets.symmetric(vertical: 12),
+        foregroundColor: ColorsManager.white,
+        backgroundColor: ColorsManager.blue,
+        textStyle: Styles.style20Medium(),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       ),
     ),
@@ -175,9 +176,10 @@ ThemeData getDarkTheme() {
       style: ElevatedButton.styleFrom(
         //side: const BorderSide(color: ColorsManager.blue, width: 2),
         elevation: 0,
-        foregroundColor: ColorsManager.darkBlue,
-        backgroundColor: ColorsManager.white,
-        textStyle: Styles.style20Bold(),
+        padding: EdgeInsets.symmetric(vertical: 12),
+        foregroundColor: ColorsManager.white,
+        backgroundColor: ColorsManager.blue,
+        textStyle: Styles.style20Medium(),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       ),
     ),

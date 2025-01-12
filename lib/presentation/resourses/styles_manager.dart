@@ -10,7 +10,7 @@ abstract class Styles {
   static TextStyle style10Regular() {
     return TextStyle(
       fontFamily: FontConstants.fontInter,
-      fontSize: getResponsiveFontSize(fontSize: 10),
+      fontSize: 10,
       fontWeight: FontWeight.w400,
     );
   }
@@ -18,7 +18,7 @@ abstract class Styles {
   static TextStyle style14Medium() {
     return TextStyle(
       fontFamily: FontConstants.fontInter,
-      fontSize: getResponsiveFontSize(fontSize: 14),
+      fontSize: 14,
       fontWeight: FontWeight.w500,
     );
   }
@@ -26,7 +26,7 @@ abstract class Styles {
   static TextStyle style16Medium() {
     return TextStyle(
       fontFamily: FontConstants.fontInter,
-      fontSize: getResponsiveFontSize(fontSize: 16),
+      fontSize: 16,
       fontWeight: FontWeight.w500,
     );
   }
@@ -34,15 +34,23 @@ abstract class Styles {
   static TextStyle style16Bold() {
     return TextStyle(
       fontFamily: FontConstants.fontInter,
-      fontSize: getResponsiveFontSize(fontSize: 16),
+      fontSize: 16,
       fontWeight: FontWeight.w700,
+    );
+  }
+
+  static TextStyle style20Medium() {
+    return TextStyle(
+      fontFamily: FontConstants.fontInter,
+      fontSize: 20,
+      fontWeight: FontWeight.w500,
     );
   }
 
   static TextStyle style20Bold() {
     return TextStyle(
       fontFamily: FontConstants.fontInter,
-      fontSize: getResponsiveFontSize(fontSize: 20),
+      fontSize: 20,
       fontWeight: FontWeight.w700,
     );
   }
