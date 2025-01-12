@@ -3,6 +3,7 @@ import 'presentation/resourses/routes_manager.dart';
 import 'presentation/resourses/theme_manager.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
