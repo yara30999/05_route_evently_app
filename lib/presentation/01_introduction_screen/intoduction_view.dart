@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../resourses/assets_manager.dart';
 import '../resourses/colors_manager.dart';
@@ -28,11 +29,11 @@ class IntroductionView extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
               Text(
-                'Personalize Your Experience',
+                context.tr('introduction_title'),
                 style: Styles.style20Bold().copyWith(color: ColorsManager.blue),
               ),
               Text(
-                "Choose your preferred theme and language to get started with a comfortable, tailored experience that suits your style.",
+                context.tr('introduction_description'),
                 style: Styles.style16Medium(),
               ),
               ThemeLanguageColumn(),
@@ -46,7 +47,7 @@ class IntroductionView extends StatelessWidget {
         child: ElevatedButton(
             onPressed: () {},
             child: Text(
-              "Let’s Start",
+              context.tr('lets_start'),
             )),
       ),
     );

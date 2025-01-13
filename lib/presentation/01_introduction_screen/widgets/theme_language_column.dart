@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'setting_row.dart';
 
@@ -10,11 +11,11 @@ class ThemeLanguageColumn extends StatelessWidget {
       spacing: 16,
       children: [
         SettingRow(
-          label: 'language',
+          label: context.tr('language'),
           isLanguage: true,
         ),
         SettingRow(
-          label: 'Theme',
+          label: context.tr('theme'),
           isLanguage: false,
         ),
       ],
