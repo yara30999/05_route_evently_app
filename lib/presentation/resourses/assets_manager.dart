@@ -17,6 +17,12 @@ class PngAssets {
   static const String meeting = '$pngPath/meeting.png';
   static const String sport = '$pngPath/sport.png';
   static const String workshop = '$pngPath/workshop.png';
+  static const String onboarding1 = '$pngPath/onboarding_1.png';
+  static const String onboarding1Dark = '$pngPath/onboarding_1_dark.png';
+  static const String onboarding2 = '$pngPath/onboarding_2.png';
+  static const String onboarding2Dark = '$pngPath/onboarding_2_dark.png';
+  static const String onboarding3 = '$pngPath/onboarding_3.png';
+  static const String onboarding3Dark = '$pngPath/onboarding_3_dark.png';
 }
 
 class SvgAssets {
