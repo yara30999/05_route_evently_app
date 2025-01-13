@@ -7,28 +7,6 @@ class ThemeProvider extends ChangeNotifier {
 
   ThemeMode themeMode = ThemeMode.light;
 
-  //   Future<void> setTheme(ThemeMode themeMode) async {
-  //   emit(ThemeLoading());
-  //   try {
-  //     await _appPreferences.setTheme(themeMode);
-  //     currentTheme = themeMode;
-  //     emit(ThemeSuccess());
-  //   } catch (e) {
-  //     emit(ThemeFailure());
-  //   }
-  // }
-
-  // Future<void> getTheme() async {
-  //   emit(ThemeLoading());
-  //   try {
-  //     var curTheme = await _appPreferences.getTheme();
-  //     currentTheme = curTheme;
-  //     emit(ThemeSuccess());
-  //   } catch (e) {
-  //     emit(ThemeFailure());
-  //   }
-  // }
-
   void setTheme() async {
     themeMode == ThemeMode.light
         ? themeMode = ThemeMode.dark
