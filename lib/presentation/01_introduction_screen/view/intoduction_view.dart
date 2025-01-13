@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../resourses/assets_manager.dart';
 import '../../resourses/colors_manager.dart';
+import '../../resourses/routes_manager.dart';
 import '../../resourses/styles_manager.dart';
 import '../view_model/theme_provider.dart';
 import 'widgets/theme_language_column.dart';
@@ -49,7 +50,9 @@ class IntroductionView extends StatelessWidget {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(bottom: 16, right: 16, left: 16),
         child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, Routes.onboardingRoute);
+            },
             child: Text(
               context.tr('lets_start'),
             )),

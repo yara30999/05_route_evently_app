@@ -1,13 +1,16 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../01_introduction_screen/view/intoduction_view.dart';
-import '../02_auth_screen/view/forgot_password_view.dart';
-import '../02_auth_screen/view/login_view.dart';
-import '../02_auth_screen/view/register_view.dart';
-import '../03_home_screen/view/home_view.dart';
-import '../04_create_event_screen/view/create_event_view.dart';
+import '../02_onboarding_screen/view/onboarding_view.dart';
+import '../03_auth_screen/view/forgot_password_view.dart';
+import '../03_auth_screen/view/login_view.dart';
+import '../03_auth_screen/view/register_view.dart';
+import '../04_home_screen/view/home_view.dart';
+import '../05_create_event_screen/view/create_event_view.dart';
 
 class Routes {
   static const String introductionRoute = "/";
+  static const String onboardingRoute = "/onboarding_route";
   static const String registerRoute = "/register_route";
   static const String loginRoute = "/login_route";
   static const String forgotPasswordRoute = "/forgot_password_route";
@@ -20,6 +23,8 @@ class RouteGenerator {
     switch (settings.name) {
       case Routes.introductionRoute:
         return MaterialPageRoute(builder: (_) => const IntroductionView());
+      case Routes.onboardingRoute:
+        return MaterialPageRoute(builder: (_) => const OnboardingView());
       case Routes.registerRoute:
         return MaterialPageRoute(builder: (_) => const RegisterView());
       case Routes.loginRoute:
@@ -37,11 +42,14 @@ class RouteGenerator {
 
   static Route<dynamic> unDefinedRoute() {
     return MaterialPageRoute(
-        builder: (_) => Scaffold(
-              appBar: AppBar(
-                title: const Text('S.current.noRouteFound'),
-              ),
-              body: const Center(child: Text('S.current.noRouteFound')),
-            ));
+      builder: (context) => Scaffold(
+        appBar: AppBar(
+          title: Text(context.tr('no_route_found')),
+        ),
+        body: Center(
+          child: Text(context.tr('no_route_found')),
+        ),
+      ),
+    );
   }
 }
