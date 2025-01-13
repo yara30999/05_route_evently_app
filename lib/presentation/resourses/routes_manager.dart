@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../01_introduction_screen/intoduction_view.dart';
+import '../01_introduction_screen/view/intoduction_view.dart';
 import '../02_auth_screen/view/forgot_password_view.dart';
 import '../02_auth_screen/view/login_view.dart';
 import '../02_auth_screen/view/register_view.dart';

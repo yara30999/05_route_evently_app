@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import '../resourses/assets_manager.dart';
-import '../resourses/colors_manager.dart';
-import '../resourses/styles_manager.dart';
+import '../../resourses/assets_manager.dart';
+import '../../resourses/colors_manager.dart';
+import '../../resourses/styles_manager.dart';
 import 'widgets/theme_language_column.dart';
 
 class IntroductionView extends StatelessWidget {

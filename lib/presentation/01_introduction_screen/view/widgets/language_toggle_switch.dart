@@ -2,8 +2,8 @@ import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:country_flags/country_flags.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import '../../resourses/colors_manager.dart';
-import '../../resourses/language_manager.dart';
+import '../../../resourses/colors_manager.dart';
+import '../../../resourses/language_manager.dart';
 
 class LanguageToggleSwitch extends StatefulWidget {
   const LanguageToggleSwitch({super.key});

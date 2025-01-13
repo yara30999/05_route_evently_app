@@ -1,6 +1,6 @@
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:flutter/material.dart';
-import '../../resourses/colors_manager.dart';
+import '../../../resourses/colors_manager.dart';
 
 class ThemeToggleSwitch extends StatefulWidget {
   const ThemeToggleSwitch({super.key});

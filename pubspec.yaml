@@ -38,6 +38,7 @@ dependencies:
   animated_toggle_switch: ^0.8.4
   country_flags: ^3.0.0
   easy_localization: ^3.0.7
+  provider: ^6.1.2
 
 dev_dependencies:
   flutter_test:
