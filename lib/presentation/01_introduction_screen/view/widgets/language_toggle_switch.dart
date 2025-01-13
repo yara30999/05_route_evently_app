@@ -5,20 +5,16 @@ import 'package:flutter/material.dart';
 import '../../../resourses/colors_manager.dart';
 import '../../../resourses/language_manager.dart';
 
-class LanguageToggleSwitch extends StatefulWidget {
+class LanguageToggleSwitch extends StatelessWidget {
   const LanguageToggleSwitch({super.key});
-
-  @override
-  LanguageToggleSwitchState createState() => LanguageToggleSwitchState();
-}
-
-class LanguageToggleSwitchState extends State<LanguageToggleSwitch> {
-  bool isEnglish = true;
 
   @override
   Widget build(BuildContext context) {
     return AnimatedToggleSwitch<bool>.rolling(
-      current: isEnglish,
+      // current == true so its english , current == false so its arabic
+      current: !LocalizationUtils.isCurrentLocalAr(context),
+      // english => true , arabic => false , as 0 & 1
+      values: const [true, false],
       iconOpacity:
           1, //showing the exact color of unselected items without opacity
       height: 30.0, //total height
@@ -30,7 +26,6 @@ class LanguageToggleSwitchState extends State<LanguageToggleSwitch> {
           backgroundColor: Colors.transparent,
           indicatorBorder: Border.all(color: ColorsManager.blue, width: 2),
           indicatorColor: ColorsManager.blue),
-      values: const [true, false],
       iconBuilder: (value, foreground) {
         return value
             ? CountryFlag.fromCountryCode(
@@ -47,8 +42,7 @@ class LanguageToggleSwitchState extends State<LanguageToggleSwitch> {
               );
       },
       onChanged: (value) {
-        setState(() => isEnglish = value);
-        isEnglish
+        value
             ? context.setLocale(LocalizationUtils.englishLocal)
             : context.setLocale(LocalizationUtils.arabicLocal);
       },

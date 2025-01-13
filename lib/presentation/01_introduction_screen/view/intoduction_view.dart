@@ -1,8 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../resourses/assets_manager.dart';
 import '../../resourses/colors_manager.dart';
 import '../../resourses/styles_manager.dart';
+import '../view_model/theme_provider.dart';
 import 'widgets/theme_language_column.dart';
 
 class IntroductionView extends StatelessWidget {
@@ -24,7 +26,9 @@ class IntroductionView extends StatelessWidget {
             children: [
               SizedBox(height: 5),
               Image.asset(
-                PngAssets.introImg,
+                Provider.of<ThemeProvider>(context).themeMode == ThemeMode.light
+                    ? PngAssets.introImg
+                    : PngAssets.introImgDark,
                 width: double.infinity,
                 fit: BoxFit.cover,
               ),

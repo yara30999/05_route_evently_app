@@ -12,6 +12,7 @@ class PngAssets {
   static const String gaming = '$pngPath/gaming.png';
   static const String holiday = '$pngPath/holiday.png';
   static const String introImg = '$pngPath/intro_img.png';
+  static const String introImgDark = '$pngPath/intro_img_dark.png';
   static const String loginImg = '$pngPath/login_image.png';
   static const String meeting = '$pngPath/meeting.png';
   static const String sport = '$pngPath/sport.png';

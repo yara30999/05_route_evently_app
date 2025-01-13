@@ -1,21 +1,19 @@
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../resourses/colors_manager.dart';
+import '../../view_model/theme_provider.dart';
 
-class ThemeToggleSwitch extends StatefulWidget {
+class ThemeToggleSwitch extends StatelessWidget {
   const ThemeToggleSwitch({super.key});
-
-  @override
-  ThemeToggleSwitchState createState() => ThemeToggleSwitchState();
-}
-
-class ThemeToggleSwitchState extends State<ThemeToggleSwitch> {
-  bool isLightTheme = true;
 
   @override
   Widget build(BuildContext context) {
     return AnimatedToggleSwitch<bool>.rolling(
-      current: isLightTheme,
+      // if the current == true , so it will select the true item which is light theme
+      current: Provider.of<ThemeProvider>(context).themeMode == ThemeMode.light,
+      // light theme => true , dark theme => false , as 0 & 1
+      values: const [true, false],
       iconOpacity:
           1, //showing the exact color of unselected items without opacity
       height: 30.0, //total height
@@ -27,7 +25,6 @@ class ThemeToggleSwitchState extends State<ThemeToggleSwitch> {
           backgroundColor: Colors.transparent,
           indicatorBorder: Border.all(color: ColorsManager.blue, width: 2),
           indicatorColor: ColorsManager.blue),
-      values: const [true, false],
       iconBuilder: (value, foreground) {
         return value
             ? Icon(
@@ -39,7 +36,9 @@ class ThemeToggleSwitchState extends State<ThemeToggleSwitch> {
                 color: foreground ? ColorsManager.white : ColorsManager.blue,
               );
       },
-      onChanged: (value) => setState(() => isLightTheme = value),
+      onChanged: (value) {
+        Provider.of<ThemeProvider>(context, listen: false).changeTheme();
+      },
     );
   }
 }
