@@ -37,7 +37,7 @@ class ThemeToggleSwitch extends StatelessWidget {
               );
       },
       onChanged: (value) {
-        Provider.of<ThemeProvider>(context, listen: false).changeTheme();
+        Provider.of<ThemeProvider>(context, listen: false).setTheme();
       },
     );
   }

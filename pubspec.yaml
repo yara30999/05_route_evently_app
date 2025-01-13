@@ -39,6 +39,7 @@ dependencies:
   country_flags: ^3.0.0
   easy_localization: ^3.0.7
   provider: ^6.1.2
+  shared_preferences: ^2.3.5
 
 dev_dependencies:
   flutter_test:
