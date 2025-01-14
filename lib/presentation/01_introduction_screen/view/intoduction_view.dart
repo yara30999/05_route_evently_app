@@ -51,7 +51,7 @@ class IntroductionView extends StatelessWidget {
         padding: const EdgeInsets.only(bottom: 16, right: 16, left: 16),
         child: ElevatedButton(
             onPressed: () {
-              Navigator.pushNamed(context, Routes.onboardingRoute);
+              Navigator.pushReplacementNamed(context, Routes.onboardingRoute);
             },
             child: Text(
               context.tr('lets_start'),

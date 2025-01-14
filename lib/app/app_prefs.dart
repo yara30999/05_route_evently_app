@@ -4,13 +4,16 @@ import 'extentions.dart';
 
 const String prefsKeyTheme = "PREFS_KEY_THEME";
 const String prefsKeyIsUserLoggedIn = "PREFS_KEY_IS_USER_LOGGED_IN";
+const String prefsKeyIsOnboardingSeen = "PREFS_KEY_IS_ONBOARDING_SEEN";
 
 abstract class AppPreferences {
   Future<String> getAppThemeName();
   Future<void> setTheme(ThemeMode theme);
   Future<ThemeMode> getTheme();
   Future<void> setUserLoggedIn();
-  Future<bool> isUserLoggedIn();
+  bool isUserLoggedIn();
+  Future<void> setOnboardingSeen();
+  bool isOnboardingSeen();
   Future<void> removePrefs();
 }
 
@@ -62,8 +65,19 @@ class AppPreferencesImpl implements AppPreferences {
   }
 
   @override
-  Future<bool> isUserLoggedIn() async {
+  bool isUserLoggedIn() {
     return _sharedPreferences.getBool(prefsKeyIsUserLoggedIn) ?? false;
+  }
+
+  // ############################################################# onboarding
+  @override
+  Future<void> setOnboardingSeen() async {
+    _sharedPreferences.setBool(prefsKeyIsOnboardingSeen, true);
+  }
+
+  @override
+  bool isOnboardingSeen() {
+    return _sharedPreferences.getBool(prefsKeyIsOnboardingSeen) ?? false;
   }
 
   // ############################################################# remove all prefs
@@ -71,5 +85,6 @@ class AppPreferencesImpl implements AppPreferences {
   Future<void> removePrefs() async {
     _sharedPreferences.remove(prefsKeyTheme);
     _sharedPreferences.remove(prefsKeyIsUserLoggedIn);
+    _sharedPreferences.remove(prefsKeyIsOnboardingSeen);
   }
 }

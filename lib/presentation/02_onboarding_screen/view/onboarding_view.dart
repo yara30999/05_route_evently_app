@@ -2,6 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:provider/provider.dart';
+import '../../../app/app_prefs.dart';
+import '../../../app/di.dart';
 import '../../01_introduction_screen/view_model/theme_provider.dart';
 import '../../resourses/assets_manager.dart';
 import '../../resourses/colors_manager.dart';
@@ -11,6 +13,11 @@ import 'widgets/arrow_circle.dart';
 
 class OnboardingView extends StatelessWidget {
   const OnboardingView({super.key});
+
+  void onDone(BuildContext context) {
+    AppPreferencesImpl(instance()).setOnboardingSeen();
+    Navigator.pushReplacementNamed(context, Routes.loginRoute);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +57,7 @@ class OnboardingView extends StatelessWidget {
         next: ArrowCircle(isForward: true),
         done: ArrowCircle(isForward: true),
         onDone: () {
-          //TODO use shared prefs to make onboarding seen. then navigate
-          Navigator.pushNamed(context, Routes.homeRoute);
+          onDone(context);
         },
         pages: [
           PageViewModel(

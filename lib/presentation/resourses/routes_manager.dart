@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import '../../app/app_prefs.dart';
+import '../../app/di.dart';
 import '../01_introduction_screen/view/intoduction_view.dart';
 import '../02_onboarding_screen/view/onboarding_view.dart';
 import '../03_auth_screen/view/forgot_password_view.dart';
@@ -19,6 +21,8 @@ class Routes {
 }
 
 class RouteGenerator {
+  static AppPreferences appPreferences = instance();
+
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.introductionRoute:
@@ -37,6 +41,14 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const CreateEventView());
       default:
         return unDefinedRoute();
+    }
+  }
+
+  static List<Route<dynamic>> generateInitialRoutes(String initialRouteName) {
+    if (appPreferences.isOnboardingSeen()) {
+      return [MaterialPageRoute(builder: (_) => const HomeView())];
+    } else {
+      return [MaterialPageRoute(builder: (_) => const IntroductionView())];
     }
   }
 
