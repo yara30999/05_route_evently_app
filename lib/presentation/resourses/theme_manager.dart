@@ -23,7 +23,7 @@ ThemeData getLightTheme() {
     // divider theme
     dividerTheme: const DividerThemeData(
       color: ColorsManager.blue,
-      thickness: 2,
+      thickness: 1,
     ),
 
     // text selection theme
@@ -43,15 +43,15 @@ ThemeData getLightTheme() {
       labelStyle: Styles.style16Medium(),
       //default border
       border: const OutlineInputBorder(
-          borderSide: BorderSide(color: ColorsManager.grey, width: 2),
+          borderSide: BorderSide(color: ColorsManager.blue, width: 2),
           borderRadius: BorderRadius.all(Radius.circular(16))),
       // enabled border style
       enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: ColorsManager.grey, width: 2),
+          borderSide: BorderSide(color: ColorsManager.blue, width: 2),
           borderRadius: BorderRadius.all(Radius.circular(16))),
       // focused border style
       focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: ColorsManager.grey, width: 2),
+          borderSide: BorderSide(color: ColorsManager.blue, width: 2),
           borderRadius: BorderRadius.all(Radius.circular(16))),
       // error border style
       errorBorder: const OutlineInputBorder(
@@ -96,6 +96,19 @@ ThemeData getLightTheme() {
       selectedItemColor: ColorsManager.white,
       unselectedItemColor: ColorsManager.white,
     ),
+
+    // text button theme
+    textButtonTheme: TextButtonThemeData(
+      style: ButtonStyle(
+        foregroundColor: WidgetStatePropertyAll(ColorsManager.blue),
+        textStyle: WidgetStateProperty.all<TextStyle>(
+          Styles.style16Bold().copyWith(
+              decoration: TextDecoration.underline,
+              fontStyle: FontStyle.italic,
+              color: ColorsManager.blue),
+        ),
+      ),
+    ),
   );
 }
 
@@ -120,7 +133,7 @@ ThemeData getDarkTheme() {
     // divider theme
     dividerTheme: const DividerThemeData(
       color: ColorsManager.blue,
-      thickness: 2,
+      thickness: 1,
     ),
 
     // text selection theme
@@ -192,6 +205,19 @@ ThemeData getDarkTheme() {
       type: BottomNavigationBarType.fixed,
       selectedItemColor: ColorsManager.white,
       unselectedItemColor: ColorsManager.white,
+    ),
+
+    // text button theme
+    textButtonTheme: TextButtonThemeData(
+      style: ButtonStyle(
+        foregroundColor: WidgetStatePropertyAll(ColorsManager.blue),
+        textStyle: WidgetStateProperty.all<TextStyle>(
+          Styles.style16Bold().copyWith(
+              decoration: TextDecoration.underline,
+              fontStyle: FontStyle.italic,
+              color: ColorsManager.blue),
+        ),
+      ),
     ),
   );
 }

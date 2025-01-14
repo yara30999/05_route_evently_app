@@ -23,10 +23,14 @@ class PngAssets {
   static const String onboarding2Dark = '$pngPath/onboarding_2_dark.png';
   static const String onboarding3 = '$pngPath/onboarding_3.png';
   static const String onboarding3Dark = '$pngPath/onboarding_3_dark.png';
+  static const String google = '$pngPath/google.png';
 }
 
 class SvgAssets {
-  static const String dummy = '$svgPath/dummy.svg';
+  static const String email = '$svgPath/email.svg';
+  static const String password = '$svgPath/password.svg';
+  static const String name = '$svgPath/name.svg';
+  static const String google = '$svgPath/google.svg';
 }
 
 class JsonAssets {

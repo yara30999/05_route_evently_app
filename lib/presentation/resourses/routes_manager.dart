@@ -46,7 +46,7 @@ class RouteGenerator {
 
   static List<Route<dynamic>> generateInitialRoutes(String initialRouteName) {
     if (appPreferences.isOnboardingSeen()) {
-      return [MaterialPageRoute(builder: (_) => const HomeView())];
+      return [MaterialPageRoute(builder: (_) => const LoginView())];
     } else {
       return [MaterialPageRoute(builder: (_) => const IntroductionView())];
     }
