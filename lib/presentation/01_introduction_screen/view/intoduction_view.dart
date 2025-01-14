@@ -15,7 +15,6 @@ class IntroductionView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         title: Image.asset(PngAssets.appLogo),
       ),
       body: SingleChildScrollView(

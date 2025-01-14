@@ -43,7 +43,6 @@ class OnboardingView extends StatelessWidget {
         footerPadding: EdgeInsets.zero);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         title: Image.asset(PngAssets.appLogo),
       ),
       body: IntroductionScreen(

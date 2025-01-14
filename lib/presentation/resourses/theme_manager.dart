@@ -13,10 +13,13 @@ ThemeData getLightTheme() {
 
     //app bar theme
     appBarTheme: AppBarTheme(
-      backgroundColor: ColorsManager.blue,
+      backgroundColor: ColorsManager.white,
       centerTitle: true,
+      titleTextStyle: Styles.style20Medium().copyWith(
+        color: ColorsManager.blue,
+      ),
       iconTheme: IconThemeData(
-        color: Colors.white,
+        color: ColorsManager.blue,
       ),
     ),
 
@@ -125,8 +128,11 @@ ThemeData getDarkTheme() {
     appBarTheme: AppBarTheme(
       backgroundColor: ColorsManager.darkBlue,
       centerTitle: true,
+      titleTextStyle: Styles.style20Medium().copyWith(
+        color: ColorsManager.blue,
+      ),
       iconTheme: IconThemeData(
-        color: Colors.white,
+        color: ColorsManager.blue,
       ),
     ),
 
