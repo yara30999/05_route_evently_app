@@ -4,4 +4,5 @@ class AppConstants {
   static const int breakPointTabletLaptop = 1200; //1700
   static const String google = 'google';
   static const String facebook = 'facebook';
+  static const String kUserDataBox = 'kUserDataBox';
 }
