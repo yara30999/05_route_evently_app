@@ -45,11 +45,13 @@ class RouteGenerator {
   }
 
   static List<Route<dynamic>> generateInitialRoutes(String initialRouteName) {
-    if (appPreferences.isOnboardingSeen()) {
-      return [MaterialPageRoute(builder: (_) => const LoginView())];
-    } else {
+    if (!appPreferences.isOnboardingSeen()) {
       return [MaterialPageRoute(builder: (_) => const IntroductionView())];
     }
+    if (!appPreferences.isUserLoggedIn()) {
+      return [MaterialPageRoute(builder: (_) => const LoginView())];
+    }
+    return [MaterialPageRoute(builder: (_) => const HomeView())];
   }
 
   static Route<dynamic> unDefinedRoute() {
