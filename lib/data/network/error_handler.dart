@@ -140,28 +140,21 @@ class ResponseCode {
 }
 
 class ResponseMessage {
-  static String success = 'success'.tr(); // success with data
-  static String noContect = 'success'.tr(); // success with no data (no content)
-  static String badRequest =
-      'bad_request_error'.tr(); // failure, API rejected request
-  static String badCertificate =
-      'incorrect_certificate_error'.tr(); //incorrect certificate
-  static String unauthorized =
-      'unauthorized_error'.tr(); // failure, user is not authorised
-  static String forbidden =
-      'forbidden_error'.tr(); //  failure, API rejected request
-  static String internalServerError =
-      'internal_server_error'.tr(); // failure, crash in server side
-  static String notFound =
-      'not_found_error'.tr(); // failure, crash in server side
-  // local status code
-  static String connectionTimeout = 'connection_timeout_error'.tr();
-  static String cancel = 'cancel_error'.tr();
-  static String recieveTimeout = 'recieve_timeout_error'.tr();
-  static String sendTimeout = 'send_timeout_error'.tr();
-  static String cacheError = 'cache_error'.tr();
-  static String noInternetConnection = 'no_internet_connection_error'.tr();
-  static String unknown = 'unknown_error'.tr();
+  static String get success => 'success'.tr();
+  static String get noContect => 'success'.tr();
+  static String get badRequest => 'bad_request_error'.tr();
+  static String get badCertificate => 'incorrect_certificate_error'.tr();
+  static String get unauthorized => 'unauthorized_error'.tr();
+  static String get forbidden => 'forbidden_error'.tr();
+  static String get internalServerError => 'internal_server_error'.tr();
+  static String get notFound => 'not_found_error'.tr();
+  static String get connectionTimeout => 'connection_timeout_error'.tr();
+  static String get cancel => 'cancel_error'.tr();
+  static String get recieveTimeout => 'recieve_timeout_error'.tr();
+  static String get sendTimeout => 'send_timeout_error'.tr();
+  static String get cacheError => 'cache_error'.tr();
+  static String get noInternetConnection => 'no_internet_connection_error'.tr();
+  static String get unknown => 'unknown_error'.tr();
 }
 
 extension AuthSourceExtension on AuthSource {
@@ -181,8 +174,8 @@ enum AuthSource {
 }
 
 class AuthMessage {
-  static String google = 'google'.tr();
-  static String facebook = 'facebook'.tr();
+  static String get google => 'google'.tr();
+  static String get facebook => 'facebook'.tr();
 }
 
 extension FirebaseSourceExtension on FirebaseSource {
@@ -233,15 +226,15 @@ enum FirebaseSource {
 }
 
 class FirebaseMessage {
-  static String weekPassword = 'week_password'.tr();
-  static String emailExists = 'email_exists'.tr();
-  static String userNotFound = 'user_not_found'.tr();
-  static String wrongPassword = 'wrong_password'.tr();
-  static String invalidCredential = 'invalid_credential'.tr();
-  static String tooManyRequests = 'too_many_requests'.tr();
-  static String invalidEmail = 'invalid_email'.tr();
-  static String oprationNotAllowed = 'opration_not_allowed'.tr();
-  static String differentCredential = 'different_credential'.tr();
-  static String invalidContinueUrl = 'invalid_continue_uri'.tr();
-  static String unauthorizedContinueUri = 'unauthorized_continue_uri'.tr();
+  static String get weekPassword => 'week_password'.tr();
+  static String get emailExists => 'email_exists'.tr();
+  static String get userNotFound => 'user_not_found'.tr();
+  static String get wrongPassword => 'wrong_password'.tr();
+  static String get invalidCredential => 'invalid_credential'.tr();
+  static String get tooManyRequests => 'too_many_requests'.tr();
+  static String get invalidEmail => 'invalid_email'.tr();
+  static String get oprationNotAllowed => 'opration_not_allowed'.tr();
+  static String get differentCredential => 'different_credential'.tr();
+  static String get invalidContinueUrl => 'invalid_continue_uri'.tr();
+  static String get unauthorizedContinueUri => 'unauthorized_continue_uri'.tr();
 }
