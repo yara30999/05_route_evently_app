@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import '../../app/extentions.dart';
@@ -16,10 +15,9 @@ abstract class RemoteDataSource {
 
 class RemoteDataSourceImpl implements RemoteDataSource {
   final FirebaseAuth _firebaseAuth;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   RemoteDataSourceImpl(this._firebaseAuth);
-  CollectionReference users = FirebaseFirestore.instance.collection('users');
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   @override
   Future<AuthenticationEntity> login(LoginRequest loginRequest) async {
@@ -28,12 +26,11 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       email: loginRequest.email,
       password: loginRequest.password,
     );
-    //read doc
-    DocumentSnapshot userData = await users.doc(credential.user?.uid).get();
+
     return AuthenticationEntity(
         uid: credential.user!.uid,
-        name: userData['name'],
-        email: userData['email']);
+        name: credential.user!.displayName.orEmpty(),
+        email: credential.user!.email.orEmpty());
   }
 
   @override
@@ -43,13 +40,18 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       email: registerRequest.email,
       password: registerRequest.password,
     );
-    //write doc
-    await users.doc(credential.user?.uid).set(
-        {'name': registerRequest.userName, 'email': registerRequest.email});
+
+    // Update user's profile with displayName
+    await credential.user?.updateDisplayName(registerRequest.userName);
+
+    // Optionally, reload the user to get updated info
+    await credential.user?.reload();
+
+    //return the AuthenticationEntity with updated data.
     return AuthenticationEntity(
         uid: credential.user!.uid,
-        name: registerRequest.userName,
-        email: registerRequest.email);
+        name: credential.user!.displayName.orEmpty(),
+        email: credential.user!.email.orEmpty());
   }
 
   @override
