@@ -1,10 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'dart:ui' as dui;
 import '../../../app/di.dart';
+import '../../../app/functions.dart';
 import '../../../app/validation_service.dart';
 import '../../01_introduction_screen/view/widgets/language_toggle_switch.dart';
 import '../../resourses/assets_manager.dart';
+import '../../resourses/routes_manager.dart';
+import '../view_model/auth_provider.dart';
 import 'widgets/custom_text_form_field.dart';
 import 'widgets/custom_text_row.dart';
 
@@ -23,12 +27,9 @@ class _RegisterViewState extends State<RegisterView> {
   final _formKey = GlobalKey<FormState>();
   final _validationService = instance<IValidationService>();
 
-  void register() {
-    if (_formKey.currentState?.validate() ?? false) {}
-  }
-
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -106,8 +107,32 @@ class _RegisterViewState extends State<RegisterView> {
                   const SizedBox(height: 24),
                   //register button
                   ElevatedButton(
-                    onPressed: register,
-                    child: Text(context.tr('createAccount')),
+                    onPressed: authProvider.isLoading
+                        ? null // Disable the button when loading
+                        : () {
+                            if (_formKey.currentState?.validate() ?? false) {
+                              authProvider
+                                  .registerUser(name!, email!, password!)
+                                  .then((_) {
+                                if (!authProvider.isLoading) {
+                                  if (authProvider.errorMessage == null) {
+                                    if (context.mounted) {
+                                      Navigator.pushNamed(
+                                          context, Routes.homeRoute);
+                                    }
+                                  } else {
+                                    if (context.mounted) {
+                                      showSnakBar(
+                                          context, authProvider.errorMessage!);
+                                    }
+                                  }
+                                }
+                              });
+                            }
+                          },
+                    child: authProvider.isLoading
+                        ? CircularProgressIndicator()
+                        : Text(context.tr('createAccount')),
                   ),
                   const SizedBox(height: 10),
                   CustomTextRow(

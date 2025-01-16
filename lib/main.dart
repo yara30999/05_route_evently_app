@@ -10,6 +10,7 @@ import 'app/di.dart';
 import 'app/functions.dart';
 import 'firebase_options.dart';
 import 'presentation/01_introduction_screen/view_model/theme_provider.dart';
+import 'presentation/03_auth_screen/view_model/auth_provider.dart';
 import 'presentation/resourses/constants_manager.dart';
 import 'presentation/resourses/language_manager.dart';
 
@@ -32,14 +33,21 @@ void main() async {
       .then((value) => {FlutterNativeSplash.remove()});
   runApp(
     EasyLocalization(
-        supportedLocales: [
-          LocalizationUtils.englishLocal,
-          LocalizationUtils.arabicLocal
-        ],
-        path: 'assets/translations',
-        fallbackLocale: LocalizationUtils.englishLocal,
-        child: ChangeNotifierProvider(
-            create: (context) => ThemeProvider(instance())..getTheme(),
-            child: MyApp())),
+      supportedLocales: [
+        LocalizationUtils.englishLocal,
+        LocalizationUtils.arabicLocal
+      ],
+      path: 'assets/translations',
+      fallbackLocale: LocalizationUtils.englishLocal,
+      child: MultiProvider(providers: [
+        ChangeNotifierProvider(
+          create: (context) => AuthProvider(
+              instance(), instance(), instance(), instance(), instance()),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ThemeProvider(instance())..getTheme(),
+        ),
+      ], child: MyApp()),
+    ),
   );
 }

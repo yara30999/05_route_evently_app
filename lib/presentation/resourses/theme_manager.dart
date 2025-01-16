@@ -112,6 +112,19 @@ ThemeData getLightTheme() {
         ),
       ),
     ),
+
+    //snak bar theme
+    snackBarTheme: SnackBarThemeData(
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: ColorsManager.peachDark,
+      contentTextStyle: Styles.style16Medium(),
+    ),
+
+    //progress indicator theme
+    progressIndicatorTheme: ProgressIndicatorThemeData(
+      color: ColorsManager.blue,
+      refreshBackgroundColor: ColorsManager.blue,
+    ),
   );
 }
 
@@ -224,6 +237,19 @@ ThemeData getDarkTheme() {
               color: ColorsManager.blue),
         ),
       ),
+    ),
+
+    //snak bar theme
+    snackBarTheme: SnackBarThemeData(
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: ColorsManager.grey,
+      contentTextStyle: Styles.style16Medium(),
+    ),
+
+    //progress indicator theme
+    progressIndicatorTheme: ProgressIndicatorThemeData(
+      color: ColorsManager.white,
+      refreshBackgroundColor: ColorsManager.white,
     ),
   );
 }
