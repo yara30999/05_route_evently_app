@@ -1,12 +1,15 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import 'dart:ui' as dui;
+import '../../../app/functions.dart';
 import '../../01_introduction_screen/view/widgets/language_toggle_switch.dart';
 import '../../resourses/assets_manager.dart';
 import '../../resourses/colors_manager.dart';
 import '../../resourses/language_manager.dart';
 import '../../resourses/routes_manager.dart';
+import '../view_model/auth_provider.dart';
 import 'widgets/custom_divider_with_text.dart';
 import 'widgets/custom_text_form_field.dart';
 import 'widgets/custom_text_row.dart';
@@ -23,14 +26,11 @@ class _LoginViewState extends State<LoginView> {
   String? password;
   final _formKey = GlobalKey<FormState>();
 
-  void login() {
-    if (_formKey.currentState?.validate() ?? false) {}
-  }
-
   void loginWithGoogle() {}
 
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
@@ -92,8 +92,32 @@ class _LoginViewState extends State<LoginView> {
                   ),
                   //login button
                   ElevatedButton(
-                    onPressed: login,
-                    child: Text(context.tr('loginLabel')),
+                    onPressed: authProvider.isLoading
+                        ? null // Disable the button when loading
+                        : () {
+                            if (_formKey.currentState?.validate() ?? false) {
+                              authProvider
+                                  .loginUser(email!, password!)
+                                  .then((_) {
+                                if (!authProvider.isLoading) {
+                                  if (authProvider.errorMessage == null) {
+                                    if (context.mounted) {
+                                      Navigator.pushNamed(
+                                          context, Routes.homeRoute);
+                                    }
+                                  } else {
+                                    if (context.mounted) {
+                                      showSnakBar(
+                                          context, authProvider.errorMessage!);
+                                    }
+                                  }
+                                }
+                              });
+                            }
+                          },
+                    child: authProvider.isLoading
+                        ? CircularProgressIndicator()
+                        : Text(context.tr('loginLabel')),
                   ),
                   const SizedBox(height: 24),
                   CustomTextRow(
