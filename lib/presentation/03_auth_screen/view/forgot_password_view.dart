@@ -69,12 +69,10 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                       : () {
                           if (_formKey.currentState?.validate() ?? false) {
                             authProvider.forgotPassword(email!).then((_) {
-                              if (!authProvider.isLoading) {
+                              if (!authProvider.isLoading && context.mounted) {
                                 if (authProvider.errorMessage == null) {
-                                  if (context.mounted) {
-                                    showSnakBar(context,
-                                        'reset_password_mail_sent'.tr());
-                                  }
+                                  showSnakBar(
+                                      context, 'reset_password_mail_sent'.tr());
                                   Future.delayed(const Duration(seconds: 2),
                                       () {
                                     if (context.mounted) {
@@ -82,10 +80,8 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                                     }
                                   });
                                 } else {
-                                  if (context.mounted) {
-                                    showSnakBar(
-                                        context, authProvider.errorMessage!);
-                                  }
+                                  showSnakBar(
+                                      context, authProvider.errorMessage!);
                                 }
                               }
                             });

@@ -99,17 +99,14 @@ class _LoginViewState extends State<LoginView> {
                               authProvider
                                   .loginUser(email!, password!)
                                   .then((_) {
-                                if (!authProvider.isLoading) {
+                                if (!authProvider.isLoading &&
+                                    context.mounted) {
                                   if (authProvider.errorMessage == null) {
-                                    if (context.mounted) {
-                                      Navigator.pushNamed(
-                                          context, Routes.homeRoute);
-                                    }
+                                    Navigator.pushNamed(
+                                        context, Routes.homeRoute);
                                   } else {
-                                    if (context.mounted) {
-                                      showSnakBar(
-                                          context, authProvider.errorMessage!);
-                                    }
+                                    showSnakBar(
+                                        context, authProvider.errorMessage!);
                                   }
                                 }
                               });
