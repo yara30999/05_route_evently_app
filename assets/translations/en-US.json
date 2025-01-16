@@ -65,5 +65,6 @@
   "invalid_continue_uri": "The continue URL provided in the request is invalid.",
   "unauthorized_continue_uri": "The domain of the continue URL is not whitelisted. Whitelist the domain in the Firebase console.",
   "no_worries": "No worries, we will send you reset instructions.",
-  "logout_account": "Logout account"
+  "logout_account": "Logout account",
+  "reset_password_mail_sent": "Reset password mail has been sent successfully to your email, go check."
 }

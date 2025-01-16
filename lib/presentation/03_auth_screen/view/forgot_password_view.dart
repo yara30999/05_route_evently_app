@@ -1,7 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'dart:ui' as dui;
+import '../../../app/functions.dart';
 import '../../resourses/assets_manager.dart';
+import '../view_model/auth_provider.dart';
 import 'widgets/custom_text_form_field.dart';
 
 class ForgotPasswordView extends StatefulWidget {
@@ -21,6 +24,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
 
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -60,8 +64,36 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                 const SizedBox(height: 30),
                 //reset password button
                 ElevatedButton(
-                  onPressed: resetPassword,
-                  child: Text(context.tr('resetPassword')),
+                  onPressed: authProvider.isLoading
+                      ? null // Disable the button when loading
+                      : () {
+                          if (_formKey.currentState?.validate() ?? false) {
+                            authProvider.forgotPassword(email!).then((_) {
+                              if (!authProvider.isLoading) {
+                                if (authProvider.errorMessage == null) {
+                                  if (context.mounted) {
+                                    showSnakBar(context,
+                                        'reset_password_mail_sent'.tr());
+                                  }
+                                  Future.delayed(const Duration(seconds: 2),
+                                      () {
+                                    if (context.mounted) {
+                                      Navigator.pop(context);
+                                    }
+                                  });
+                                } else {
+                                  if (context.mounted) {
+                                    showSnakBar(
+                                        context, authProvider.errorMessage!);
+                                  }
+                                }
+                              }
+                            });
+                          }
+                        },
+                  child: authProvider.isLoading
+                      ? CircularProgressIndicator()
+                      : Text(context.tr('resetPassword')),
                 ),
                 const SizedBox(height: 24),
               ],
