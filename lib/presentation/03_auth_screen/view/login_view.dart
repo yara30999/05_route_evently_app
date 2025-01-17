@@ -130,7 +130,21 @@ class _LoginViewState extends State<LoginView> {
                   const SizedBox(height: 16),
                   //login with google button
                   ElevatedButton(
-                    onPressed: loginWithGoogle,
+                    onPressed: authProvider.isLoading
+                        ? null // Disable the button when loading
+                        : () {
+                            authProvider.googleSignIn().then((_) {
+                              if (!authProvider.isLoading && context.mounted) {
+                                if (authProvider.errorMessage == null) {
+                                  Navigator.pushNamed(
+                                      context, Routes.homeRoute);
+                                } else {
+                                  showSnakBar(
+                                      context, authProvider.errorMessage!);
+                                }
+                              }
+                            });
+                          },
                     style: ButtonStyle(
                         foregroundColor:
                             WidgetStatePropertyAll(ColorsManager.blue),
@@ -139,15 +153,17 @@ class _LoginViewState extends State<LoginView> {
                         side: WidgetStatePropertyAll(
                           BorderSide(color: ColorsManager.blue, width: 2),
                         )),
-                    child: Row(
-                      spacing: 10,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        SvgPicture.asset(SvgAssets.google),
-                        Text('loginWithGoogle'.tr())
-                      ],
-                    ),
+                    child: authProvider.isGoogleLoading
+                        ? CircularProgressIndicator()
+                        : Row(
+                            spacing: 10,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              SvgPicture.asset(SvgAssets.google),
+                              Text('loginWithGoogle'.tr())
+                            ],
+                          ),
                   ),
                   const SizedBox(height: 24),
                   Padding(

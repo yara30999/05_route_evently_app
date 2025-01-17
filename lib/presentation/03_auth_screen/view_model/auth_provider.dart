@@ -25,14 +25,21 @@ class AuthProvider extends ChangeNotifier {
 
   AuthenticationEntity? _authObj;
   bool _isLoading = false;
+  bool _isGoogleLoading = false;
   String? _errorMessage;
 
   AuthenticationEntity? get authObj => _authObj;
   bool get isLoading => _isLoading;
+  bool get isGoogleLoading => _isGoogleLoading;
   String? get errorMessage => _errorMessage;
 
   void _setLoading(bool value) {
     _isLoading = value;
+    notifyListeners();
+  }
+
+  void _setGoogleLoading(bool value) {
+    _isGoogleLoading = value;
     notifyListeners();
   }
 
@@ -69,7 +76,7 @@ class AuthProvider extends ChangeNotifier {
   }
 
   Future<void> googleSignIn() async {
-    _setLoading(true);
+    _setGoogleLoading(true);
     var result = await _googleSignInUseCase.execute();
     result.fold((failure) {
       _setErrorMessage('${failure.message} ${failure.code}');
@@ -77,7 +84,7 @@ class AuthProvider extends ChangeNotifier {
       _authObj = authEntity;
       _setErrorMessage(null);
     });
-    _setLoading(false);
+    _setGoogleLoading(false);
   }
 
   Future<void> logout() async {
