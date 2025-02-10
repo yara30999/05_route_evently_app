@@ -24,6 +24,7 @@ class PngAssets {
   static const String onboarding3 = '$pngPath/onboarding_3.png';
   static const String onboarding3Dark = '$pngPath/onboarding_3_dark.png';
   static const String google = '$pngPath/google.png';
+  static const String route = '$pngPath/route.png';
 }
 
 class SvgAssets {
@@ -31,6 +32,12 @@ class SvgAssets {
   static const String password = '$svgPath/password.svg';
   static const String name = '$svgPath/name.svg';
   static const String google = '$svgPath/google.svg';
+  static const String home = '$svgPath/home.svg';
+  static const String map = '$svgPath/map.svg';
+  static const String love = '$svgPath/love.svg';
+  static const String profile = '$svgPath/profile.svg';
+  static const String dropdownArrow = '$svgPath/dropdown_arrow.svg';
+  static const String logout = '$svgPath/logout.svg';
 }
 
 class JsonAssets {

@@ -93,7 +93,6 @@ class AuthProvider extends ChangeNotifier {
     result.fold((failure) {
       _setErrorMessage('${failure.message} ${failure.code}');
     }, (_) {
-      _authObj = null;
       _setErrorMessage(null);
     });
     _setLoading(false);
