@@ -51,6 +51,8 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   dartz: ^0.10.1
+  bloc: ^9.0.0
+  flutter_bloc: ^9.0.0
 
 dev_dependencies:
   flutter_test:
