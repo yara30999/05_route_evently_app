@@ -11,7 +11,6 @@ import 'app/functions.dart';
 import 'firebase_options.dart';
 import 'presentation/01_introduction_screen/view_model/theme_provider.dart';
 import 'presentation/03_auth_screen/view_model/auth_provider.dart';
-import 'presentation/05_create_event_screen/view_model/create_event_provider.dart';
 import 'presentation/resourses/constants_manager.dart';
 import 'presentation/resourses/language_manager.dart';
 
@@ -47,9 +46,6 @@ void main() async {
         ),
         ChangeNotifierProvider(
           create: (context) => ThemeProvider(instance())..getTheme(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => CreateEventProvider(),
         ),
       ], child: MyApp()),
     ),

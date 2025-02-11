@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import '../../../app/extentions.dart';
 import '../../resourses/assets_manager.dart';
 import '../../resourses/language_manager.dart';
@@ -19,72 +19,85 @@ class CreateEventView extends StatefulWidget {
 
 class _CreateEventViewState extends State<CreateEventView> {
   final TextEditingController titleController = TextEditingController();
-  final TextEditingController decriptionController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    titleController.dispose();
+    descriptionController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("create_event".tr()),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Material(
-                clipBehavior: Clip.hardEdge,
-                borderRadius: BorderRadius.circular(25),
-                elevation: 6,
-                child: Image.asset(
-                  context
-                      .watch<CreateEventProvider>()
-                      .categoryItem
-                      .getPngImage(context),
-                  height: 200,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
+    return ChangeNotifierProvider(
+      create: (context) => CreateEventProvider(),
+      builder: (context, child) => Scaffold(
+        appBar: AppBar(
+          title: Text("create_event".tr()),
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Material(
+                  clipBehavior: Clip.hardEdge,
+                  borderRadius: BorderRadius.circular(25),
+                  elevation: 6,
+                  child: Image.asset(
+                    context
+                        .watch<CreateEventProvider>()
+                        .categoryItem
+                        .getPngImage(context),
+                    height: 200,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                  top: 16,
-                  right: LocalizationUtils.isCurrentLocalAr(context) ? 16 : 0.0,
-                  left: LocalizationUtils.isCurrentLocalAr(context) ? 0.0 : 16),
-              child: const CategorySection(),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                spacing: 16,
-                children: [
-                  EventTextField(
-                    label: 'title'.tr(),
-                    hint: 'event_title'.tr(),
-                    textController: titleController,
-                    svgString: SvgAssets.eventTitle,
-                  ),
-                  EventTextField(
-                    label: 'description'.tr(),
-                    hint: 'event_description'.tr(),
-                    textController: decriptionController,
-                    maxLines: 5,
-                  ),
-                  PickerRow(EventPicker.date),
-                  PickerRow(EventPicker.time),
-                  ChooseLocationButton(),
-                  ElevatedButton(
-                      onPressed: () {
-                        titleController.text;
-                      },
-                      child: Text('add_event'.tr()))
-                ],
+              Padding(
+                padding: EdgeInsets.only(
+                    top: 16,
+                    right:
+                        LocalizationUtils.isCurrentLocalAr(context) ? 16 : 0.0,
+                    left:
+                        LocalizationUtils.isCurrentLocalAr(context) ? 0.0 : 16),
+                child: const CategorySection(),
               ),
-            )
-          ],
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  spacing: 16,
+                  children: [
+                    EventTextField(
+                      label: 'title'.tr(),
+                      hint: 'event_title'.tr(),
+                      textController: titleController,
+                      svgString: SvgAssets.eventTitle,
+                    ),
+                    EventTextField(
+                      label: 'description'.tr(),
+                      hint: 'event_description'.tr(),
+                      textController: descriptionController,
+                      maxLines: 5,
+                    ),
+                    PickerRow(EventPicker.date),
+                    PickerRow(EventPicker.time),
+                    ChooseLocationButton(),
+                    ElevatedButton(
+                        onPressed: () {
+                          titleController.text;
+                          descriptionController.text;
+                        },
+                        child: Text('add_event'.tr()))
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
