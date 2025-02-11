@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../presentation/resourses/assets_manager.dart';
 import '../presentation/resourses/constants_manager.dart';
+import 'functions.dart';
 
 const String light = "light_theme";
 const String dark = "dark_theme";
@@ -43,8 +44,7 @@ extension NonNullInteger on int? {
 
 enum EventPicker { date, time }
 
-enum CategoryItemEntity {
-  all,
+enum CategoryItems {
   birthday,
   bookClub,
   sport,
@@ -56,78 +56,84 @@ enum CategoryItemEntity {
   meeting;
 }
 
-extension CategoryItemEntityExtension on CategoryItemEntity {
+extension CategoryItemsExtension on CategoryItems {
   String getName() {
     switch (this) {
-      case CategoryItemEntity.all:
-        return 'all'.tr();
-      case CategoryItemEntity.birthday:
+      case CategoryItems.birthday:
         return 'birthday'.tr();
-      case CategoryItemEntity.bookClub:
+      case CategoryItems.bookClub:
         return 'book_club'.tr();
-      case CategoryItemEntity.sport:
+      case CategoryItems.sport:
         return 'sport'.tr();
-      case CategoryItemEntity.eating:
+      case CategoryItems.eating:
         return 'eating'.tr();
-      case CategoryItemEntity.exhibition:
+      case CategoryItems.exhibition:
         return 'exhibition'.tr();
-      case CategoryItemEntity.gaming:
+      case CategoryItems.gaming:
         return 'gaming'.tr();
-      case CategoryItemEntity.holiday:
+      case CategoryItems.holiday:
         return 'holiday'.tr();
-      case CategoryItemEntity.workshop:
+      case CategoryItems.workshop:
         return 'workshop'.tr();
-      case CategoryItemEntity.meeting:
+      case CategoryItems.meeting:
         return 'meeting'.tr();
     }
   }
 
-  String getPngImage() {
+  String getPngImage(BuildContext context) {
     switch (this) {
-      case CategoryItemEntity.birthday:
-        return PngAssets.birthday;
-      case CategoryItemEntity.bookClub:
-        return PngAssets.bookClub;
-      case CategoryItemEntity.sport:
-        return PngAssets.sport;
-      case CategoryItemEntity.eating:
-        return PngAssets.eating;
-      case CategoryItemEntity.exhibition:
-        return PngAssets.exhibition;
-      case CategoryItemEntity.gaming:
-        return PngAssets.gaming;
-      case CategoryItemEntity.holiday:
-        return PngAssets.holiday;
-      case CategoryItemEntity.workshop:
-        return PngAssets.workshop;
-      case CategoryItemEntity.meeting:
-        return PngAssets.meeting;
-      default:
-        return '';
+      case CategoryItems.birthday:
+        return isLightTheme(context)
+            ? PngAssets.birthday
+            : PngAssets.birthdayDark;
+      case CategoryItems.bookClub:
+        return isLightTheme(context)
+            ? PngAssets.bookClub
+            : PngAssets.bookClubDark;
+      case CategoryItems.sport:
+        return isLightTheme(context) ? PngAssets.sport : PngAssets.sportDark;
+      case CategoryItems.eating:
+        return isLightTheme(context) ? PngAssets.eating : PngAssets.eatingDark;
+      case CategoryItems.exhibition:
+        return isLightTheme(context)
+            ? PngAssets.exhibition
+            : PngAssets.exhibitionDark;
+      case CategoryItems.gaming:
+        return isLightTheme(context) ? PngAssets.gaming : PngAssets.gamingDark;
+      case CategoryItems.holiday:
+        return isLightTheme(context)
+            ? PngAssets.holiday
+            : PngAssets.holidayDark;
+      case CategoryItems.workshop:
+        return isLightTheme(context)
+            ? PngAssets.workshop
+            : PngAssets.workshopDark;
+      case CategoryItems.meeting:
+        return isLightTheme(context)
+            ? PngAssets.meeting
+            : PngAssets.meetingDark;
     }
   }
 
   String getSvgIcon() {
     switch (this) {
-      case CategoryItemEntity.all:
-        return SvgAssets.all;
-      case CategoryItemEntity.birthday:
+      case CategoryItems.birthday:
         return SvgAssets.birthday;
-      case CategoryItemEntity.bookClub:
+      case CategoryItems.bookClub:
         return SvgAssets.bookClub;
-      case CategoryItemEntity.sport:
+      case CategoryItems.sport:
         return SvgAssets.sport;
-      case CategoryItemEntity.eating:
+      case CategoryItems.eating:
         return SvgAssets.eating;
-      case CategoryItemEntity.exhibition:
+      case CategoryItems.exhibition:
         return SvgAssets.exhibition;
-      case CategoryItemEntity.gaming:
+      case CategoryItems.gaming:
         return SvgAssets.gaming;
-      case CategoryItemEntity.holiday:
+      case CategoryItems.holiday:
         return SvgAssets.holiday;
-      case CategoryItemEntity.workshop:
+      case CategoryItems.workshop:
         return SvgAssets.workshop;
-      case CategoryItemEntity.meeting:
+      case CategoryItems.meeting:
         return SvgAssets.meeting;
     }
   }

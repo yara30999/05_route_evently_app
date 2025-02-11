@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import '../../../../domain/entities/category_item.dart';
+import '../../../../app/extentions.dart';
 import 'active_inactive_category_item.dart';
 
 class CategoryItem extends StatelessWidget {
   const CategoryItem({
     super.key,
     required this.isActive,
-    required this.categoryItemEntity,
+    required this.categoryItem,
   });
 
   final bool isActive;
-  final CategoryItemEntity categoryItemEntity;
+  final CategoryItems categoryItem;
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +18,8 @@ class CategoryItem extends StatelessWidget {
       firstCurve: Curves.linear,
       secondCurve: Curves.linear,
       duration: const Duration(milliseconds: 500),
-      firstChild: ActiveCatigoryItem(categoryItemEntity: categoryItemEntity),
-      secondChild: InActiveCatigoryItem(categoryItemEntity: categoryItemEntity),
+      firstChild: ActiveCatigoryItem(categoryItem),
+      secondChild: InActiveCatigoryItem(categoryItem),
       crossFadeState:
           isActive ? CrossFadeState.showFirst : CrossFadeState.showSecond,
     );

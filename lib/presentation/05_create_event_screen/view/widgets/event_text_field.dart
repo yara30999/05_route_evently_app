@@ -32,6 +32,7 @@ class EventTextField extends StatelessWidget {
         TextField(
           controller: textController,
           maxLines: maxLines,
+          keyboardType: TextInputType.text,
           decoration: InputDecoration(
             hintText: hint,
             prefixIcon: svgString == null

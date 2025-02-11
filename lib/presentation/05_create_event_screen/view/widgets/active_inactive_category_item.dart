@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import '../../../../app/extentions.dart';
 import '../../../../app/functions.dart';
-import '../../../../domain/entities/category_item.dart';
 import '../../../resourses/colors_manager.dart';
 import '../../../resourses/styles_manager.dart';
 
 class ActiveCatigoryItem extends StatelessWidget {
-  const ActiveCatigoryItem({
+  const ActiveCatigoryItem(
+    this.categoryItem, {
     super.key,
-    required this.categoryItemEntity,
   });
-  final CategoryItemEntity categoryItemEntity;
+  final CategoryItems categoryItem;
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +39,10 @@ class ActiveCatigoryItem extends StatelessWidget {
           AspectRatio(
               aspectRatio: 1,
               child:
-                  Center(child: SvgPicture.asset(categoryItemEntity.svgIcon))),
+                  Center(child: SvgPicture.asset(categoryItem.getSvgIcon()))),
           FittedBox(
             fit: BoxFit.scaleDown,
-            child: Text(categoryItemEntity.name,
+            child: Text(categoryItem.getName(),
                 textAlign: TextAlign.center,
                 style: Styles.style16Bold().copyWith(
                     color: Theme.of(context).scaffoldBackgroundColor)),
@@ -54,11 +54,11 @@ class ActiveCatigoryItem extends StatelessWidget {
 }
 
 class InActiveCatigoryItem extends StatelessWidget {
-  const InActiveCatigoryItem({
+  const InActiveCatigoryItem(
+    this.categoryItem, {
     super.key,
-    required this.categoryItemEntity,
   });
-  final CategoryItemEntity categoryItemEntity;
+  final CategoryItems categoryItem;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -86,14 +86,14 @@ class InActiveCatigoryItem extends StatelessWidget {
           AspectRatio(
             aspectRatio: 1,
             child: Center(
-              child: SvgPicture.asset(categoryItemEntity.svgIcon,
+              child: SvgPicture.asset(categoryItem.getSvgIcon(),
                   colorFilter:
                       ColorFilter.mode(ColorsManager.blue, BlendMode.srcIn)),
             ),
           ),
           FittedBox(
             fit: BoxFit.scaleDown,
-            child: Text(categoryItemEntity.name,
+            child: Text(categoryItem.getName(),
                 textAlign: TextAlign.center,
                 style:
                     Styles.style16Bold().copyWith(color: ColorsManager.blue)),

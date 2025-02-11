@@ -1,8 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../app/extentions.dart';
 import '../../resourses/assets_manager.dart';
 import '../../resourses/language_manager.dart';
+import '../view_model/create_event_provider.dart';
 import 'widgets/category_section.dart';
 import 'widgets/choose_location_button.dart';
 import 'widgets/event_text_field.dart';
@@ -36,8 +38,12 @@ class _CreateEventViewState extends State<CreateEventView> {
                 borderRadius: BorderRadius.circular(25),
                 elevation: 6,
                 child: Image.asset(
-                  PngAssets.birthday,
+                  context
+                      .watch<CreateEventProvider>()
+                      .categoryItem
+                      .getPngImage(context),
                   height: 200,
+                  width: double.infinity,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -71,7 +77,10 @@ class _CreateEventViewState extends State<CreateEventView> {
                   PickerRow(EventPicker.time),
                   ChooseLocationButton(),
                   ElevatedButton(
-                      onPressed: () {}, child: Text('add_event'.tr()))
+                      onPressed: () {
+                        titleController.text;
+                      },
+                      child: Text('add_event'.tr()))
                 ],
               ),
             )

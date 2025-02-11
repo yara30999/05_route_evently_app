@@ -1,11 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 import '../../../../app/extentions.dart';
 import '../../../../app/functions.dart';
 import '../../../resourses/assets_manager.dart';
 import '../../../resourses/colors_manager.dart';
 import '../../../resourses/styles_manager.dart';
+import '../../view_model/create_event_provider.dart';
 
 class PickerRow extends StatelessWidget {
   final EventPicker eventPicker;
@@ -42,23 +44,27 @@ class PickerRow extends StatelessWidget {
                   lastDate: DateTime.now().add(
                     Duration(days: 365),
                   ));
-              if (chosenDate != null) {
-                //provider.changeSelectedDate(chosenDate);
+              if (chosenDate != null && context.mounted) {
+                Provider.of<CreateEventProvider>(context, listen: false)
+                    .changeSelectedDate(chosenDate);
               }
             } else {
               var chosenTime = await showTimePicker(
                 context: context,
                 initialTime: TimeOfDay.now(),
               );
-              if (chosenTime != null) {
-                //provider.changeSelectedTime(chosenDate);
+              if (chosenTime != null && context.mounted) {
+                Provider.of<CreateEventProvider>(context, listen: false)
+                    .changeSelectedTime(chosenTime);
               }
             }
           },
           child: Text(
             eventPicker == EventPicker.date
-                ? 'choose_date'.tr()
-                : "choose_time".tr(),
+                ? context.watch<CreateEventProvider>().formattedDate ??
+                    'choose_date'.tr()
+                : context.watch<CreateEventProvider>().formattedTime ??
+                    "choose_time".tr(),
             style: Styles.style16Medium().copyWith(color: ColorsManager.blue),
           ),
         ),
