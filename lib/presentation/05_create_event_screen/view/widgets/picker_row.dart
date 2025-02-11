@@ -46,7 +46,7 @@ class PickerRow extends StatelessWidget {
                   ));
               if (chosenDate != null && context.mounted) {
                 Provider.of<CreateEventProvider>(context, listen: false)
-                    .changeSelectedDate(chosenDate);
+                    .onDateSelection(chosenDate);
               }
             } else {
               var chosenTime = await showTimePicker(
@@ -55,7 +55,7 @@ class PickerRow extends StatelessWidget {
               );
               if (chosenTime != null && context.mounted) {
                 Provider.of<CreateEventProvider>(context, listen: false)
-                    .changeSelectedTime(chosenTime);
+                    .onTimeSelection(chosenTime);
               }
             }
           },

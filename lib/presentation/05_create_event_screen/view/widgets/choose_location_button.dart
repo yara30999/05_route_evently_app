@@ -1,9 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
+import '../../../../app/functions.dart';
 import '../../../resourses/assets_manager.dart';
 import '../../../resourses/colors_manager.dart';
+import '../../../resourses/routes_manager.dart';
 import '../../../resourses/styles_manager.dart';
+import '../../view_model/create_event_provider.dart';
 
 class ChooseLocationButton extends StatelessWidget {
   const ChooseLocationButton({
@@ -12,8 +16,24 @@ class ChooseLocationButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var provider = context.watch<CreateEventProvider>();
+    var locationLabel = provider.selectedLocation == null
+        ? null
+        : 'Lat: ${provider.selectedLocation!.latitude.floorToDouble()} Lng: ${provider.selectedLocation!.longitude.floorToDouble()}';
     return OutlinedButton(
-        onPressed: () {},
+        onPressed: () async {
+          try {
+            await context.read<CreateEventProvider>().getCurrentUserLocation();
+            if (context.mounted) {
+              Navigator.pushNamed(context, Routes.pickLocationRoute,
+                  arguments: context.read<CreateEventProvider>());
+            }
+          } catch (e) {
+            if (context.mounted) {
+              showSnakBar(context, e.toString());
+            }
+          }
+        },
         child: Row(
           spacing: 10,
           children: [
@@ -30,7 +50,7 @@ class ChooseLocationButton extends StatelessWidget {
               ),
             ),
             Text(
-              "choose_location".tr(),
+              locationLabel ?? "choose_location".tr(),
               style: Styles.style16Medium(),
             ),
             Spacer(),
