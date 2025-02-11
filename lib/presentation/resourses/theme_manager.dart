@@ -90,6 +90,22 @@ ThemeData getLightTheme() {
       ),
     ),
 
+    // outlined button theme
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: ButtonStyle(
+        textStyle: WidgetStatePropertyAll(Styles.style16Medium()),
+        shape: WidgetStatePropertyAll(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.0),
+          ),
+        ),
+        iconColor: WidgetStatePropertyAll(ColorsManager.blue),
+        foregroundColor: WidgetStatePropertyAll(ColorsManager.blue),
+        backgroundColor: WidgetStatePropertyAll(ColorsManager.white),
+        side: WidgetStatePropertyAll(BorderSide(color: ColorsManager.blue)),
+      ),
+    ),
+
     // bottom navigation bar
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: ColorsManager.blue,
@@ -213,6 +229,22 @@ ThemeData getDarkTheme() {
         backgroundColor: ColorsManager.blue,
         textStyle: Styles.style20Medium(),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      ),
+    ),
+
+    // outlined button theme
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: ButtonStyle(
+        textStyle: WidgetStatePropertyAll(Styles.style16Medium()),
+        shape: WidgetStatePropertyAll(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.0),
+          ),
+        ),
+        iconColor: WidgetStatePropertyAll(ColorsManager.blue),
+        foregroundColor: WidgetStatePropertyAll(ColorsManager.blue),
+        backgroundColor: WidgetStatePropertyAll(ColorsManager.darkBlue),
+        side: WidgetStatePropertyAll(BorderSide(color: ColorsManager.blue)),
       ),
     ),
 

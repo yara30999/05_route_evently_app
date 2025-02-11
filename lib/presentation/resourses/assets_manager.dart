@@ -7,7 +7,7 @@ class PngAssets {
   static const String birthday = '$pngPath/birthday.png';
   static const String bookClub = '$pngPath/book_club.png';
   static const String eating = '$pngPath/eating.png';
-  static const String exhibtion = '$pngPath/exhibtion.png';
+  static const String exhibition = '$pngPath/exhibtion.png';
   static const String forgotPassword = '$pngPath/forget_password.png';
   static const String gaming = '$pngPath/gaming.png';
   static const String holiday = '$pngPath/holiday.png';
@@ -38,6 +38,24 @@ class SvgAssets {
   static const String profile = '$svgPath/profile.svg';
   static const String dropdownArrow = '$svgPath/dropdown_arrow.svg';
   static const String logout = '$svgPath/logout.svg';
+  static const String all = '$svgPath/all.svg';
+  static const String birthday = '$svgPath/birthday.svg';
+  static const String bookClub = '$svgPath/book_club.svg';
+  static const String date = '$svgPath/date.svg';
+  static const String eating = '$svgPath/eating.svg';
+  static const String eventTitle = '$svgPath/event_title.svg';
+  static const String exhibition = '$svgPath/exhibition.svg';
+  static const String gaming = '$svgPath/gaming.svg';
+  static const String holiday = '$svgPath/holiday.svg';
+  static const String location = '$svgPath/location.svg';
+  static const String loveOutlinedBlue = '$svgPath/love_outlined_blue.svg';
+  static const String loveSolidBlue = '$svgPath/love_solid_blue.svg';
+  static const String mapPin = '$svgPath/map_pin.svg';
+  static const String meeting = '$svgPath/meeting.svg';
+  static const String search = '$svgPath/search.svg';
+  static const String sport = '$svgPath/sport.svg';
+  static const String time = '$svgPath/time.svg';
+  static const String workshop = '$svgPath/workshop.svg';
 }
 
 class JsonAssets {
