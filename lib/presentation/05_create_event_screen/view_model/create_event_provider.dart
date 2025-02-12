@@ -10,8 +10,8 @@ class CreateEventProvider extends ChangeNotifier {
 
   CreateEventProvider(this._addEventUsecase);
 
-  CategoryItems categoryItem = CategoryItems.values.first;
-  int categoryIndex = 0;
+  int categoryIndex = 1;
+  CategoryItems categoryItem = CategoryItems.values[1];
   String? formattedDate;
   String? formattedTime;
   LatLng? currentUserLocation;

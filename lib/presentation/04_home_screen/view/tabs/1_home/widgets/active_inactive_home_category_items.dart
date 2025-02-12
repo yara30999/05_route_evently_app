@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import '../../../../app/extentions.dart';
-import '../../../../app/functions.dart';
-import '../../../resourses/colors_manager.dart';
-import '../../../resourses/styles_manager.dart';
+import '../../../../../../app/extentions.dart';
+import '../../../../../../app/functions.dart';
+import '../../../../../resourses/colors_manager.dart';
+import '../../../../../resourses/styles_manager.dart';
 
-class ActiveCatigoryItem extends StatelessWidget {
-  const ActiveCatigoryItem(
+class ActiveHomeCatigoryItem extends StatelessWidget {
+  const ActiveHomeCatigoryItem(
     this.categoryItem, {
     super.key,
   });
@@ -19,13 +19,16 @@ class ActiveCatigoryItem extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       padding: EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
-        color: ColorsManager.blue,
+        color: isLightTheme(context) ? ColorsManager.white : ColorsManager.blue,
         borderRadius: BorderRadius.circular(40),
-        border: Border.all(color: ColorsManager.blue),
+        border: Border.all(
+            color: isLightTheme(context)
+                ? ColorsManager.white
+                : ColorsManager.blue),
         boxShadow: [
           BoxShadow(
               color: isLightTheme(context)
-                  ? ColorsManager.grey.withValues(alpha: 0.5)
+                  ? ColorsManager.white.withValues(alpha: 0.5)
                   : ColorsManager.blue.withValues(alpha: 0.4), // Shadow color
               blurRadius: 1.0, // Spread of the shadow
               offset: Offset(2.0, 4.0), // Shadow position (x, y)
@@ -42,24 +45,28 @@ class ActiveCatigoryItem extends StatelessWidget {
                   child: SvgPicture.asset(categoryItem.getSvgIcon(),
                       colorFilter: ColorFilter.mode(
                           isLightTheme(context)
-                              ? ColorsManager.white
-                              : ColorsManager.darkBlue,
+                              ? ColorsManager.blue
+                              : ColorsManager.white,
                           BlendMode.srcIn)))),
           FittedBox(
             fit: BoxFit.scaleDown,
             child: Text(categoryItem.getName(),
                 textAlign: TextAlign.center,
                 style: Styles.style16Bold().copyWith(
-                    color: Theme.of(context).scaffoldBackgroundColor)),
+                  color: isLightTheme(context)
+                      ? ColorsManager.blue
+                      : ColorsManager.white,
+                )),
           ),
+          SizedBox(width: 10)
         ],
       ),
     );
   }
 }
 
-class InActiveCatigoryItem extends StatelessWidget {
-  const InActiveCatigoryItem(
+class InActiveHomeCatigoryItem extends StatelessWidget {
+  const InActiveHomeCatigoryItem(
     this.categoryItem, {
     super.key,
   });
@@ -71,13 +78,17 @@ class InActiveCatigoryItem extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       padding: EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
-        color: Theme.of(context).scaffoldBackgroundColor,
+        color:
+            isLightTheme(context) ? ColorsManager.blue : ColorsManager.darkBlue,
         borderRadius: BorderRadius.circular(40),
-        border: Border.all(color: ColorsManager.blue),
+        border: Border.all(
+            color: isLightTheme(context)
+                ? ColorsManager.white
+                : ColorsManager.blue),
         boxShadow: [
           BoxShadow(
               color: isLightTheme(context)
-                  ? ColorsManager.grey.withValues(alpha: 0.5)
+                  ? ColorsManager.white.withValues(alpha: 0.5)
                   : ColorsManager.blue.withValues(alpha: 0.4), // Shadow color
               blurRadius: 1.0, // Spread of the shadow
               offset: Offset(2.0, 4.0), // Shadow position (x, y)
@@ -93,7 +104,7 @@ class InActiveCatigoryItem extends StatelessWidget {
             child: Center(
               child: SvgPicture.asset(categoryItem.getSvgIcon(),
                   colorFilter:
-                      ColorFilter.mode(ColorsManager.blue, BlendMode.srcIn)),
+                      ColorFilter.mode(ColorsManager.white, BlendMode.srcIn)),
             ),
           ),
           FittedBox(
@@ -101,8 +112,9 @@ class InActiveCatigoryItem extends StatelessWidget {
             child: Text(categoryItem.getName(),
                 textAlign: TextAlign.center,
                 style:
-                    Styles.style16Bold().copyWith(color: ColorsManager.blue)),
+                    Styles.style16Bold().copyWith(color: ColorsManager.white)),
           ),
+          SizedBox(width: 10)
         ],
       ),
     );

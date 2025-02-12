@@ -15,6 +15,7 @@ class ProfileHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 200,
+      clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
         color: ColorsManager.blue,
         borderRadius: BorderRadius.only(

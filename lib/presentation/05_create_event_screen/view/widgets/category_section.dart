@@ -16,13 +16,16 @@ class CategorySection extends StatelessWidget {
       child: ListView.builder(
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
-          itemCount: CategoryItems.values.length,
+          itemCount: CategoryItems.values.length - 1,
           itemBuilder: (buildContext, index) {
+            // to start from (birthday = 1) ,(bookClub = 2), ...
+            // and remove (all=0)
+            var actualIndex = index + 1;
             return GestureDetector(
               onTap: () async {
-                if (activeIndex != index) {
+                if (activeIndex != actualIndex) {
                   Provider.of<CreateEventProvider>(context, listen: false)
-                      .onCategorySelection(index);
+                      .onCategorySelection(actualIndex);
                 }
               },
               child: Padding(
@@ -34,8 +37,8 @@ class CategorySection extends StatelessWidget {
                 child: CategoryItem(
                   isActive:
                       context.watch<CreateEventProvider>().categoryIndex ==
-                          index,
-                  categoryItem: CategoryItems.values[index],
+                          actualIndex,
+                  categoryItem: CategoryItems.values[actualIndex],
                 ),
               ),
             );

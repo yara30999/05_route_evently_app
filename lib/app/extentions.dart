@@ -45,6 +45,7 @@ extension NonNullInteger on int? {
 enum EventPicker { date, time }
 
 enum CategoryItems {
+  all,
   birthday,
   bookClub,
   sport,
@@ -59,6 +60,8 @@ enum CategoryItems {
 extension CategoryItemsExtension on CategoryItems {
   String getName() {
     switch (this) {
+      case CategoryItems.all:
+        return 'all'.tr();
       case CategoryItems.birthday:
         return 'birthday'.tr();
       case CategoryItems.bookClub:
@@ -112,11 +115,15 @@ extension CategoryItemsExtension on CategoryItems {
         return isLightTheme(context)
             ? PngAssets.meeting
             : PngAssets.meetingDark;
+      default:
+        return PngAssets.birthday;
     }
   }
 
   String getSvgIcon() {
     switch (this) {
+      case CategoryItems.all:
+        return SvgAssets.all;
       case CategoryItems.birthday:
         return SvgAssets.birthday;
       case CategoryItems.bookClub:
