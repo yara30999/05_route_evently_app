@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../../../../../03_auth_screen/view_model/auth_provider.dart';
 import '../../../../../resourses/assets_manager.dart';
 import '../../../../../resourses/colors_manager.dart';
+import '../../../../../resourses/language_manager.dart';
 import '../../../../../resourses/styles_manager.dart';
 
 class ProfileHeader extends StatelessWidget {
@@ -16,7 +17,14 @@ class ProfileHeader extends StatelessWidget {
       height: 200,
       decoration: BoxDecoration(
         color: ColorsManager.blue,
-        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(64)),
+        borderRadius: BorderRadius.only(
+          bottomLeft: LocalizationUtils.isCurrentLocalAr(context)
+              ? Radius.zero
+              : Radius.circular(64),
+          bottomRight: LocalizationUtils.isCurrentLocalAr(context)
+              ? Radius.circular(64)
+              : Radius.zero,
+        ),
       ),
       child: SafeArea(
         child: Row(
@@ -27,8 +35,12 @@ class ProfileHeader extends StatelessWidget {
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(1000),
                 bottomRight: Radius.circular(1000),
-                topLeft: Radius.circular(10),
-                topRight: Radius.circular(1000),
+                topLeft: LocalizationUtils.isCurrentLocalAr(context)
+                    ? Radius.circular(1000)
+                    : Radius.circular(10),
+                topRight: LocalizationUtils.isCurrentLocalAr(context)
+                    ? Radius.circular(10)
+                    : Radius.circular(1000),
               ),
               child: Image.asset(
                 PngAssets.route,
