@@ -100,8 +100,10 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
   @override
   Future<void> addEvent(AddEventRequest addEventRequest) async {
+    String currentUserId = _firebaseAuth.currentUser?.uid ?? "";
     //write doc
     await events.doc().set(EventResponse(
+          userId: currentUserId,
           categoryId: addEventRequest.categoryId,
           title: addEventRequest.title,
           description: addEventRequest.description,

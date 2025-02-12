@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class EventResponse {
+  final String? userId;
   final int? categoryId;
   final String? title;
   final String? description;
@@ -11,7 +12,8 @@ class EventResponse {
   final bool? isLiked;
 
   EventResponse(
-      {this.categoryId,
+      {this.userId,
+      this.categoryId,
       this.title,
       this.description,
       this.date,
@@ -25,6 +27,7 @@ class EventResponse {
   ) {
     final data = snapshot.data();
     return EventResponse(
+      userId: data?['userId'],
       categoryId: data?['categoryId'],
       title: data?['title'],
       description: data?['description'],
@@ -38,6 +41,7 @@ class EventResponse {
 
   Map<String, dynamic> toFirestore() {
     return {
+      "userId": userId,
       if (categoryId != null) "categoryId": categoryId,
       if (title != null) "title": title,
       "description": description,
