@@ -103,5 +103,7 @@
   "this_is_your_location": "This is your location.",
   "picked_place": "Picked Place.",
   "you_picked_this_location": "You picked this location.",
-  "tap_on_location_to_select": "Tap on Location To Select"
+  "tap_on_location_to_select": "Tap on Location To Select",
+  "event_added": "Event added successfully.",
+  "you_have_to_pick_location": "You have to pick location for your event."
 }

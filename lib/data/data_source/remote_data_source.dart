@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import '../../app/extentions.dart';
 import '../../domain/entities/auth_entity.dart';
 import '../../presentation/resourses/constants_manager.dart';
 import '../network/requests.dart';
+import '../responses/event_response.dart';
 
 abstract class RemoteDataSource {
   Future<AuthenticationEntity> login(LoginRequest loginRequest);
@@ -11,10 +13,12 @@ abstract class RemoteDataSource {
   Future<AuthenticationEntity> register(RegisterRequest registerRequest);
   Future<AuthenticationEntity> googleSignIn();
   Future<void> logout();
+  Future<void> addEvent(AddEventRequest addEventRequest);
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
   final FirebaseAuth _firebaseAuth;
+  CollectionReference events = FirebaseFirestore.instance.collection('events');
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   RemoteDataSourceImpl(this._firebaseAuth);
@@ -92,5 +96,20 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   @override
   Future<void> forgotPassword(String email) async {
     return await _firebaseAuth.sendPasswordResetEmail(email: email);
+  }
+
+  @override
+  Future<void> addEvent(AddEventRequest addEventRequest) async {
+    //write doc
+    await events.doc().set(EventResponse(
+          categoryId: addEventRequest.categoryId,
+          title: addEventRequest.title,
+          description: addEventRequest.description,
+          date: addEventRequest.date,
+          time: addEventRequest.time,
+          lat: addEventRequest.lat,
+          lng: addEventRequest.lng,
+          isLiked: addEventRequest.isLiked,
+        ).toFirestore());
   }
 }

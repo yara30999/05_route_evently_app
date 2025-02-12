@@ -11,4 +11,5 @@ abstract class Repository {
       RegisterRequest registerRequest);
   Future<Either<Failure, AuthenticationEntity>> googleSignIn();
   Future<Either<Failure, bool>> logout();
+  Future<Either<Failure, bool>> addEvent(AddEventRequest addEventRequest);
 }

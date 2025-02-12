@@ -3,14 +3,61 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../../app/extentions.dart';
+import '../../../domain/usecase/add_event_usecase.dart';
 
 class CreateEventProvider extends ChangeNotifier {
+  final AddEventUsecase _addEventUsecase;
+
+  CreateEventProvider(this._addEventUsecase);
+
   CategoryItems categoryItem = CategoryItems.values.first;
   int categoryIndex = 0;
   String? formattedDate;
   String? formattedTime;
   LatLng? currentUserLocation;
   LatLng? selectedLocation;
+
+  bool _isLoading = false;
+  String? _errorMessage;
+
+  bool get isLoading => _isLoading;
+  String? get errorMessage => _errorMessage;
+
+  void _setLoading(bool value) {
+    _isLoading = value;
+    notifyListeners();
+  }
+
+  void _setErrorMessage(String? message) {
+    _errorMessage = message;
+    notifyListeners();
+  }
+
+  Future<void> addEvent(String title, String description) async {
+    _setLoading(true);
+    formattedDate ??= DateFormat('dd/MM/yyyy').format(DateTime.now());
+    formattedTime ??= DateFormat('hh:mm a').format(DateTime.now());
+    if (selectedLocation == null) {
+      _setErrorMessage('you_have_to_pick_location'.tr());
+      _setLoading(false);
+      return; //break the function.
+    }
+    var result = await _addEventUsecase.execute(AddEventUseCaseInput(
+        categoryIndex,
+        title,
+        description,
+        formattedDate!,
+        formattedTime!,
+        selectedLocation?.latitude ?? 22.0, //for more protection
+        selectedLocation?.longitude ?? 21.0, //for more protection
+        false));
+    result.fold((failure) {
+      _setErrorMessage('${failure.message} ${failure.code}');
+    }, (authEntity) {
+      _setErrorMessage(null);
+    });
+    _setLoading(false);
+  }
 
   void onCategorySelection(int index) {
     categoryItem = CategoryItems.values[index];
