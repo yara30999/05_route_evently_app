@@ -68,5 +68,6 @@ class SvgAssets {
 }
 
 class JsonAssets {
-  static const String dummy = '$jsonPath/dummy.json';
+  static const String empty = '$jsonPath/empty.json';
+  static const String error = '$jsonPath/error.json';
 }

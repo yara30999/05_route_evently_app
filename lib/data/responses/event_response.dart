@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class EventResponse {
+  final String? id;
   final String? userId;
   final int? categoryId;
   final String? title;
@@ -12,7 +13,8 @@ class EventResponse {
   final bool? isLiked;
 
   EventResponse(
-      {this.userId,
+      {this.id,
+      this.userId,
       this.categoryId,
       this.title,
       this.description,
@@ -27,6 +29,7 @@ class EventResponse {
   ) {
     final data = snapshot.data();
     return EventResponse(
+      id: snapshot.id,
       userId: data?['userId'],
       categoryId: data?['categoryId'],
       title: data?['title'],

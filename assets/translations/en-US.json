@@ -106,5 +106,7 @@
   "tap_on_location_to_select": "Tap on Location To Select",
   "event_added": "Event added successfully.",
   "you_have_to_pick_location": "You have to pick location for your event.",
-  "welcome": "Welcome Back ✨"
+  "welcome": "Welcome Back ✨",
+  "no_events": "You didn't add any events here.",
+  "failedToLoadEvents": "Failed to load events: {}"
 }

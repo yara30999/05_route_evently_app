@@ -1,9 +1,11 @@
 import 'package:dartz/dartz.dart';
 import '../../app/app_prefs.dart';
 import '../../domain/entities/auth_entity.dart';
+import '../../domain/entities/event_entity.dart';
 import '../../domain/repository/repository.dart';
 import '../data_source/local_data_source.dart';
 import '../data_source/remote_data_source.dart';
+import '../mappers/mappers.dart';
 import '../network/error_handler.dart';
 import '../network/failure.dart';
 import '../network/network_info.dart';
@@ -116,5 +118,15 @@ class RepositoryImpl implements Repository {
     } else {
       return Left(DataSource.noInternetConnection.getFailure());
     }
+  }
+
+  @override
+  Stream<List<EventEntity>> getEvents() {
+    return _remoteDataSource.getEvents().map((eventResponses) {
+      // Map each EventResponse to EventEntity
+      return eventResponses
+          .map((eventResponse) => eventResponse.toDomain())
+          .toList();
+    });
   }
 }

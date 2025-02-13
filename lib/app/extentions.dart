@@ -30,12 +30,59 @@ extension NonNullString on String? {
       return this!;
     }
   }
+
+  String toShortMonthFormat() {
+    try {
+      final date = DateTime.parse(orEmpty().split('/').reversed.join('-'));
+      return '${date.day} ${_monthAbbreviation(date.month)}';
+    } catch (e) {
+      return this!; // Return the original string if parsing fails
+    }
+  }
+
+  String _monthAbbreviation(int month) {
+    const months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec'
+    ];
+    return months[month - 1];
+  }
 }
 
 extension NonNullInteger on int? {
   int orZero() {
     if (this == null) {
       return AppConstants.zero;
+    } else {
+      return this!;
+    }
+  }
+}
+
+extension NonNullDouble on double? {
+  double orZero() {
+    if (this == null) {
+      return AppConstants.zeroDouble;
+    } else {
+      return this!;
+    }
+  }
+}
+
+extension NonNullBool on bool? {
+  bool orFalse() {
+    if (this == null) {
+      return false;
     } else {
       return this!;
     }

@@ -106,5 +106,7 @@
   "tap_on_location_to_select": "اضغط على الموقع لتحديده",
   "event_added": "تمت إضافة المناسبة بنجاح.",
   "you_have_to_pick_location": "يتعين عليك اختيار الموقع لمناسبتك.",
-  "welcome": "أهلا بعودتك ✨"
+  "welcome": "أهلا بعودتك ✨",
+  "no_events": "لم تقم بإضافة أي مناسبات هنا.",
+  "failedToLoadEvents": "فشل تحميل المناسبات: {}"
 }

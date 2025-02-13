@@ -14,6 +14,7 @@ abstract class RemoteDataSource {
   Future<AuthenticationEntity> googleSignIn();
   Future<void> logout();
   Future<void> addEvent(AddEventRequest addEventRequest);
+  Stream<List<EventResponse>> getEvents();
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -113,5 +114,17 @@ class RemoteDataSourceImpl implements RemoteDataSource {
           lng: addEventRequest.lng,
           isLiked: addEventRequest.isLiked,
         ).toFirestore());
+  }
+
+  @override
+  Stream<List<EventResponse>> getEvents() {
+    return events
+        .snapshots() // Listen to the collection as a stream
+        .map((QuerySnapshot snapshot) {
+      return snapshot.docs
+          .map((doc) => EventResponse.fromFirestore(
+              doc as DocumentSnapshot<Map<String, dynamic>>))
+          .toList();
+    });
   }
 }

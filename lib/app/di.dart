@@ -8,6 +8,7 @@ import '../data/network/network_info.dart';
 import '../data/repository/repository_impl.dart';
 import '../domain/repository/repository.dart';
 import '../domain/usecase/add_event_usecase.dart';
+import '../domain/usecase/events_usecase.dart';
 import '../domain/usecase/forgot_password_usecase.dart';
 import '../domain/usecase/google_sign_in_usecase.dart';
 import '../domain/usecase/login_usecase.dart';
@@ -67,5 +68,9 @@ Future<void> initAppModule() async {
   if (!GetIt.I.isRegistered<AddEventUsecase>()) {
     instance
         .registerFactory<AddEventUsecase>(() => AddEventUsecase(instance()));
+  }
+  // stream events usecase
+  if (!GetIt.I.isRegistered<EventsUsecase>()) {
+    instance.registerFactory<EventsUsecase>(() => EventsUsecase(instance()));
   }
 }
