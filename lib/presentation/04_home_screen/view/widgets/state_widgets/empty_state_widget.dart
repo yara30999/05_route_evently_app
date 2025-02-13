@@ -9,21 +9,23 @@ class EmptyStateWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      spacing: 30.0,
-      children: [
-        SizedBox(height: 30.0),
-        Text(
-          label,
-          style: Styles.style20Bold(),
-        ),
-        Lottie.asset(
-          JsonAssets.empty,
-          width: double.infinity,
-          fit: BoxFit.contain,
-        ),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        spacing: 30.0,
+        children: [
+          SizedBox(height: 30.0),
+          Text(
+            label,
+            style: Styles.style20Bold(),
+          ),
+          Lottie.asset(
+            JsonAssets.empty,
+            width: double.infinity,
+            fit: BoxFit.contain,
+          ),
+        ],
+      ),
     );
   }
 }

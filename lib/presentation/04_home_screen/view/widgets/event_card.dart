@@ -99,7 +99,7 @@ class _EventCardState extends State<EventCard> {
                 width: double.infinity,
                 height: 55,
                 margin: EdgeInsets.all(8),
-                padding: EdgeInsets.all(8),
+                padding: EdgeInsets.symmetric(horizontal: 8),
                 decoration: BoxDecoration(
                   color: Theme.of(context).scaffoldBackgroundColor,
                   borderRadius: BorderRadius.circular(8),
@@ -109,6 +109,8 @@ class _EventCardState extends State<EventCard> {
                     Expanded(
                       child: Text(
                         widget.item.title,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                         style: Styles.style16Bold().copyWith(
                           color: isLightTheme(context)
                               ? ColorsManager.black

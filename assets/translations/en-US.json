@@ -108,5 +108,6 @@
   "you_have_to_pick_location": "You have to pick location for your event.",
   "welcome": "Welcome Back ✨",
   "no_events": "You didn't add any events here.",
-  "failedToLoadEvents": "Failed to load events: {}"
+  "failedToLoadEvents": "Failed to load events: {}",
+  "search_for_event": "Search for Event..."
 }

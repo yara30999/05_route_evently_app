@@ -108,5 +108,6 @@
   "you_have_to_pick_location": "يتعين عليك اختيار الموقع لمناسبتك.",
   "welcome": "أهلا بعودتك ✨",
   "no_events": "لم تقم بإضافة أي مناسبات هنا.",
-  "failedToLoadEvents": "فشل تحميل المناسبات: {}"
+  "failedToLoadEvents": "فشل تحميل المناسبات: {}",
+  "search_for_event": "إبحث عن المناسبة..."
 }

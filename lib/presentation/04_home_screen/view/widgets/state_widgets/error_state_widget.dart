@@ -14,17 +14,19 @@ class ErrorStateWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Lottie.asset(JsonAssets.error, fit: BoxFit.contain, width: width),
-        Text(
-          errorText,
-          style: Styles.style20Bold(),
-        ),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Lottie.asset(JsonAssets.error, fit: BoxFit.contain, width: width),
+          Text(
+            errorText,
+            style: Styles.style20Bold(),
+          ),
+        ],
+      ),
     );
   }
 }
