@@ -129,4 +129,19 @@ class RepositoryImpl implements Repository {
           .toList();
     });
   }
+
+  @override
+  Future<Either<Failure, bool>> toggleFavourite(
+      UpdateLikeRequest updateLikeRequest) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        await _remoteDataSource.toggleFavourite(updateLikeRequest);
+        return const Right(true);
+      } catch (error) {
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
 }

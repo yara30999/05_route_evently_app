@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../../app/extentions.dart';
 import '../../../../app/functions.dart';
 import '../../../../domain/entities/event_entity.dart';
 import '../../../resourses/colors_manager.dart';
 import '../../../resourses/styles_manager.dart';
+import '../../view_model/like_unlike_provider.dart';
 
 class EventCard extends StatefulWidget {
   final EventEntity item;
@@ -42,6 +44,7 @@ class _EventCardState extends State<EventCard> {
     final pngImage = CategoryItems.values
         .elementAt(widget.item.categoryId)
         .getPngImage(context);
+    final togglefavouriteProvider = context.read<LikeUnlikeProvider>();
     return GestureDetector(
       onTap: () {
         //TODO
@@ -128,10 +131,20 @@ class _EventCardState extends State<EventCard> {
                         setState(() {
                           liked = !liked;
                         });
-                        //TODO
-                        // for acutual effect in firebase database
-                        // BlocProvider.of<LikeUnlikeProvider>(context)
-                        //     .toggle(event: widget.item);
+                        togglefavouriteProvider
+                            .toggle(eventId: widget.item.id, isliked: liked)
+                            .then((_) {
+                          if ( //loading has stopped
+                              !togglefavouriteProvider.isLoading &&
+                                  // and we have error message .
+                                  togglefavouriteProvider.errorMessage !=
+                                      null &&
+                                  //context still in the rendering tree
+                                  context.mounted) {
+                            showSnakBar(
+                                context, togglefavouriteProvider.errorMessage!);
+                          }
+                        });
                       },
                     ),
                   ],

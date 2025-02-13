@@ -34,3 +34,13 @@ class AddEventRequest {
     this.isLiked = false,
   });
 }
+
+class UpdateLikeRequest {
+  String eventId;
+  bool isLiked;
+
+  UpdateLikeRequest(
+    this.eventId,
+    this.isLiked,
+  );
+}

@@ -11,6 +11,7 @@ import 'app/functions.dart';
 import 'firebase_options.dart';
 import 'presentation/01_introduction_screen/view_model/theme_provider.dart';
 import 'presentation/03_auth_screen/view_model/auth_provider.dart';
+import 'presentation/04_home_screen/view_model/like_unlike_provider.dart';
 import 'presentation/resourses/constants_manager.dart';
 import 'presentation/resourses/language_manager.dart';
 
@@ -43,6 +44,9 @@ void main() async {
         ChangeNotifierProvider(
           create: (context) => AuthProvider(
               instance(), instance(), instance(), instance(), instance()),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => LikeUnlikeProvider(instance()),
         ),
         ChangeNotifierProvider(
           create: (context) => ThemeProvider(instance())..getTheme(),

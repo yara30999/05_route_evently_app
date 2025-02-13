@@ -14,6 +14,7 @@ import '../domain/usecase/google_sign_in_usecase.dart';
 import '../domain/usecase/login_usecase.dart';
 import '../domain/usecase/logout_usecase.dart';
 import '../domain/usecase/register_usecase.dart';
+import '../domain/usecase/toggle_favourite_usecase.dart';
 import 'app_prefs.dart';
 import 'validation_service.dart';
 
@@ -72,5 +73,10 @@ Future<void> initAppModule() async {
   // stream events usecase
   if (!GetIt.I.isRegistered<EventsUsecase>()) {
     instance.registerFactory<EventsUsecase>(() => EventsUsecase(instance()));
+  }
+  // toggle favourite usecase
+  if (!GetIt.I.isRegistered<ToggleFavouriteUsecase>()) {
+    instance.registerFactory<ToggleFavouriteUsecase>(
+        () => ToggleFavouriteUsecase(instance()));
   }
 }

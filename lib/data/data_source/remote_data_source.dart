@@ -15,6 +15,7 @@ abstract class RemoteDataSource {
   Future<void> logout();
   Future<void> addEvent(AddEventRequest addEventRequest);
   Stream<List<EventResponse>> getEvents();
+  Future<void> toggleFavourite(UpdateLikeRequest updateLikeRequest);
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -118,13 +119,24 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
   @override
   Stream<List<EventResponse>> getEvents() {
+    String currentUserId = _firebaseAuth.currentUser?.uid ?? "";
     return events
         .snapshots() // Listen to the collection as a stream
         .map((QuerySnapshot snapshot) {
       return snapshot.docs
           .map((doc) => EventResponse.fromFirestore(
               doc as DocumentSnapshot<Map<String, dynamic>>))
+          // to get a specific user events only
+          .where((event) => event.userId!.contains(currentUserId))
           .toList();
     });
+  }
+
+  @override
+  Future<void> toggleFavourite(UpdateLikeRequest updateLikeRequest) async {
+    //update doc
+    await events
+        .doc(updateLikeRequest.eventId)
+        .update({'isLiked': updateLikeRequest.isLiked});
   }
 }
