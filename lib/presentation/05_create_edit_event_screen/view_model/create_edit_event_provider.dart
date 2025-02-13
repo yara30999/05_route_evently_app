@@ -4,11 +4,13 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../../app/extentions.dart';
 import '../../../domain/usecase/add_event_usecase.dart';
+import '../../../domain/usecase/update_event_usecase.dart';
 
 class CreateEditEventProvider extends ChangeNotifier {
   final AddEventUsecase _addEventUsecase;
+  final UpdateEventUsecase _updateEventUsecase;
 
-  CreateEditEventProvider(this._addEventUsecase,
+  CreateEditEventProvider(this._addEventUsecase, this._updateEventUsecase,
       {this.categoryIndex,
       this.categoryItem,
       this.formattedDate,
@@ -25,16 +27,14 @@ class CreateEditEventProvider extends ChangeNotifier {
   LatLng? currentUserLocation;
   LatLng? selectedLocation;
 
-  bool _createLoading = false;
-  bool _updateLoading = false;
+  bool _isLoading = false;
   String? _errorMessage;
 
-  bool get createLoading => _createLoading;
-  bool get updateLoading => _updateLoading;
+  bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
 
   void _setLoading(bool value) {
-    _createLoading = value;
+    _isLoading = value;
     notifyListeners();
   }
 
@@ -63,7 +63,35 @@ class CreateEditEventProvider extends ChangeNotifier {
         false));
     result.fold((failure) {
       _setErrorMessage('${failure.message} ${failure.code}');
-    }, (authEntity) {
+    }, (isSuceess) {
+      _setErrorMessage(null);
+    });
+    _setLoading(false);
+  }
+
+  Future<void> updateEvent(
+      String eventId, String title, String description) async {
+    _setLoading(true);
+    formattedDate ??= DateFormat('dd/MM/yyyy').format(DateTime.now());
+    formattedTime ??= DateFormat('hh:mm a').format(DateTime.now());
+    if (selectedLocation == null) {
+      _setErrorMessage('you_have_to_pick_location'.tr());
+      _setLoading(false);
+      return; //break the function.
+    }
+    var result = await _updateEventUsecase.execute(UpdateEventUseCaseInput(
+        eventId,
+        categoryIndex!,
+        title,
+        description,
+        formattedDate!,
+        formattedTime!,
+        selectedLocation?.latitude ?? 22.0, //for more protection
+        selectedLocation?.longitude ?? 21.0, //for more protection
+        false));
+    result.fold((failure) {
+      _setErrorMessage('${failure.message} ${failure.code}');
+    }, (isSuceess) {
       _setErrorMessage(null);
     });
     _setLoading(false);

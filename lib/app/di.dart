@@ -15,6 +15,7 @@ import '../domain/usecase/login_usecase.dart';
 import '../domain/usecase/logout_usecase.dart';
 import '../domain/usecase/register_usecase.dart';
 import '../domain/usecase/toggle_favourite_usecase.dart';
+import '../domain/usecase/update_event_usecase.dart';
 import 'app_prefs.dart';
 import 'validation_service.dart';
 
@@ -78,5 +79,10 @@ Future<void> initAppModule() async {
   if (!GetIt.I.isRegistered<ToggleFavouriteUsecase>()) {
     instance.registerFactory<ToggleFavouriteUsecase>(
         () => ToggleFavouriteUsecase(instance()));
+  }
+  // update event usecase
+  if (!GetIt.I.isRegistered<UpdateEventUsecase>()) {
+    instance.registerFactory<UpdateEventUsecase>(
+        () => UpdateEventUsecase(instance()));
   }
 }

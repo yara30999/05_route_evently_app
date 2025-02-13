@@ -14,6 +14,7 @@ abstract class RemoteDataSource {
   Future<AuthenticationEntity> googleSignIn();
   Future<void> logout();
   Future<void> addEvent(AddEventRequest addEventRequest);
+  Future<void> updateEvent(UpdateEventRequest updateEventRequest);
   Stream<List<EventResponse>> getEvents();
   Future<void> toggleFavourite(UpdateLikeRequest updateLikeRequest);
 }
@@ -114,6 +115,23 @@ class RemoteDataSourceImpl implements RemoteDataSource {
           lat: addEventRequest.lat,
           lng: addEventRequest.lng,
           isLiked: addEventRequest.isLiked,
+        ).toFirestore());
+  }
+
+  @override
+  Future<void> updateEvent(UpdateEventRequest updateEventRequest) async {
+    String currentUserId = _firebaseAuth.currentUser?.uid ?? "";
+    //write doc
+    await events.doc(updateEventRequest.id).update(EventResponse(
+          userId: currentUserId,
+          categoryId: updateEventRequest.categoryId,
+          title: updateEventRequest.title,
+          description: updateEventRequest.description,
+          date: updateEventRequest.date,
+          time: updateEventRequest.time,
+          lat: updateEventRequest.lat,
+          lng: updateEventRequest.lng,
+          isLiked: updateEventRequest.isLiked,
         ).toFirestore());
   }
 

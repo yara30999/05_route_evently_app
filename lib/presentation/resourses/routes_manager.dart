@@ -42,7 +42,9 @@ class RouteGenerator {
       case Routes.homeRoute:
         return MaterialPageRoute(builder: (_) => const HomeView());
       case Routes.createEditEventRoute:
-        EventEntity? eventEntity = settings.arguments as EventEntity;
+        EventEntity? eventEntity = settings.arguments == null
+            ? null
+            : settings.arguments as EventEntity;
         return MaterialPageRoute(
             builder: (_) => CreateEditEventView(eventEntity: eventEntity));
       case Routes.pickLocationRoute:

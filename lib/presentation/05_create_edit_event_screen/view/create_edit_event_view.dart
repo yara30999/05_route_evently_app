@@ -53,6 +53,7 @@ class _CreateEditEventViewState extends State<CreateEditEventView> {
     return ChangeNotifierProvider(
         create: (context) => CreateEditEventProvider(
               instance(),
+              instance(),
               categoryIndex: categoryId,
               categoryItem: categoryItem,
               formattedDate: widget.eventEntity?.date,
@@ -62,6 +63,7 @@ class _CreateEditEventViewState extends State<CreateEditEventView> {
         builder: (context, child) {
           final createEditEventProvider =
               Provider.of<CreateEditEventProvider>(context);
+
           return Scaffold(
             appBar: AppBar(
               title: Text(
@@ -122,39 +124,47 @@ class _CreateEditEventViewState extends State<CreateEditEventView> {
                         PickerRow(EventPicker.time),
                         ChooseLocationButton(),
                         ElevatedButton(
-                          onPressed: createEditEventProvider.createLoading &&
-                                  createEditEventProvider.updateLoading
+                          onPressed: createEditEventProvider.isLoading
                               ? null // Disable the button when loading
                               : () {
-                                  if (isCreateEvent) {
-                                    if (titleController.text.isNotEmpty &&
-                                        descriptionController.text.isNotEmpty) {
-                                      createEditEventProvider
-                                          .addEvent(titleController.text,
-                                              descriptionController.text)
-                                          .then((_) {
-                                        if (!createEditEventProvider
-                                                .createLoading &&
-                                            context.mounted &&
-                                            createEditEventProvider
-                                                    .errorMessage ==
-                                                null) {
-                                          showSnakBar(
-                                              context, 'event_added'.tr());
-                                          Navigator.pop(context);
-                                        } else {
-                                          if (context.mounted) {
-                                            showSnakBar(
-                                                context,
-                                                createEditEventProvider
-                                                    .errorMessage!);
-                                          }
-                                        }
-                                      });
+                                  if (titleController.text.isEmpty ||
+                                      descriptionController.text.isEmpty) {
+                                    return;
+                                  }
+
+                                  Future<void> action = isCreateEvent
+                                      ? createEditEventProvider.addEvent(
+                                          titleController.text,
+                                          descriptionController.text)
+                                      : createEditEventProvider.updateEvent(
+                                          widget.eventEntity!.id,
+                                          titleController.text,
+                                          descriptionController.text);
+
+                                  action.then((_) {
+                                    if (!createEditEventProvider.isLoading &&
+                                        context.mounted &&
+                                        createEditEventProvider.errorMessage ==
+                                            null) {
+                                      showSnakBar(
+                                          context,
+                                          isCreateEvent
+                                              ? 'event_added'.tr()
+                                              : 'event_updated'.tr());
+                                      Navigator.pop(context);
+                                      if (!isCreateEvent) {
+                                        // Extra pop only for updates
+                                        Navigator.pop(context);
+                                      }
+                                    } else if (context.mounted) {
+                                      showSnakBar(
+                                          context,
+                                          createEditEventProvider
+                                              .errorMessage!);
                                     }
-                                  } else {}
+                                  });
                                 },
-                          child: createEditEventProvider.createLoading
+                          child: createEditEventProvider.isLoading
                               ? CircularProgressIndicator()
                               : Text(
                                   isCreateEvent

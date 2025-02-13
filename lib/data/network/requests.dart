@@ -35,6 +35,30 @@ class AddEventRequest {
   });
 }
 
+class UpdateEventRequest {
+  String id;
+  int? categoryId;
+  String? title;
+  String? description;
+  String? date;
+  String? time;
+  double? lat;
+  double? lng;
+  bool isLiked;
+
+  UpdateEventRequest({
+    required this.id,
+    required this.categoryId,
+    required this.title,
+    required this.description,
+    required this.date,
+    required this.time,
+    required this.lat,
+    required this.lng,
+    this.isLiked = false,
+  });
+}
+
 class UpdateLikeRequest {
   String eventId;
   bool isLiked;

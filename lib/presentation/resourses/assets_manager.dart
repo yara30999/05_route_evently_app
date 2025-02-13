@@ -65,6 +65,8 @@ class SvgAssets {
   static const String sport = '$svgPath/sport.svg';
   static const String time = '$svgPath/time.svg';
   static const String workshop = '$svgPath/workshop.svg';
+  static const String delete = '$svgPath/delete.svg';
+  static const String edit = '$svgPath/edit.svg';
 }
 
 class JsonAssets {

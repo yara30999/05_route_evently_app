@@ -13,6 +13,8 @@ abstract class Repository {
   Future<Either<Failure, AuthenticationEntity>> googleSignIn();
   Future<Either<Failure, bool>> logout();
   Future<Either<Failure, bool>> addEvent(AddEventRequest addEventRequest);
+  Future<Either<Failure, bool>> updateEvent(
+      UpdateEventRequest updateEventRequest);
   Stream<List<EventEntity>> getEvents();
   Future<Either<Failure, bool>> toggleFavourite(
       UpdateLikeRequest updateLikeRequest);
