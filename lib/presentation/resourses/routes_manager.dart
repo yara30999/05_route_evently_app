@@ -12,6 +12,7 @@ import '../04_home_screen/view/home_view.dart';
 import '../05_create_edit_event_screen/view/create_edit_event_view.dart';
 import '../05_create_edit_event_screen/view_model/create_edit_event_provider.dart';
 import '../06_pick_location_screen/view/pick_location_view.dart';
+import '../07_event_details_screen/view/event_details_view.dart';
 
 class Routes {
   static const String introductionRoute = "/";
@@ -21,6 +22,7 @@ class Routes {
   static const String forgotPasswordRoute = "/forgot_password_route";
   static const String homeRoute = "/home_route";
   static const String createEditEventRoute = "/create_edit_event_route";
+  static const String eventDetailsRoute = "/event_details_route";
   static const String pickLocationRoute = "/pick_location_route";
 }
 
@@ -41,6 +43,10 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const ForgotPasswordView());
       case Routes.homeRoute:
         return MaterialPageRoute(builder: (_) => const HomeView());
+      case Routes.eventDetailsRoute:
+        EventEntity eventEntity = settings.arguments as EventEntity;
+        return MaterialPageRoute(
+            builder: (_) => EventDetailsView(eventEntity: eventEntity));
       case Routes.createEditEventRoute:
         EventEntity? eventEntity = settings.arguments == null
             ? null

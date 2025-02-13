@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../presentation/resourses/assets_manager.dart';
 import '../presentation/resourses/constants_manager.dart';
+import '../presentation/resourses/language_manager.dart';
 import 'functions.dart';
 
 const String light = "light_theme";
@@ -40,6 +41,16 @@ extension NonNullString on String? {
     }
   }
 
+  String toLongMonthFormat(BuildContext context) {
+    bool isArabic = LocalizationUtils.isCurrentLocalAr(context);
+    try {
+      final date = DateTime.parse(orEmpty().split('/').reversed.join('-'));
+      return '${date.day} ${_monthFullName(date.month, isArabic)} ${date.year}';
+    } catch (e) {
+      return this!; // Return the original string if parsing fails
+    }
+  }
+
   String _monthAbbreviation(int month) {
     const months = [
       'Jan',
@@ -56,6 +67,41 @@ extension NonNullString on String? {
       'Dec'
     ];
     return months[month - 1];
+  }
+
+  String _monthFullName(int month, bool isArabic) {
+    const months = {
+      false: [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December'
+      ],
+      true: [
+        'يناير',
+        'فبراير',
+        'مارس',
+        'أبريل',
+        'مايو',
+        'يونيو',
+        'يوليو',
+        'أغسطس',
+        'سبتمبر',
+        'أكتوبر',
+        'نوفمبر',
+        'ديسمبر'
+      ],
+    };
+
+    return months[isArabic]?.elementAt(month - 1) ?? months['en']![month - 1];
   }
 }
 

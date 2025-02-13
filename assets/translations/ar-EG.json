@@ -92,6 +92,7 @@
   "event_description": "وصف المناسبة",
   "event_date": "تاريخ المناسبة",
   "event_time": "وقت المناسبة",
+  "event_details": "تفاصيل المناسبة",
   "choose_date": "إختر التاريخ",
   "choose_time": "إختر الوقت",
   "choose_location": "إختر الموقع",
@@ -112,5 +113,7 @@
   "welcome": "أهلا بعودتك ✨",
   "no_events": "لم تقم بإضافة أي مناسبات هنا.",
   "failedToLoadEvents": "فشل تحميل المناسبات: {}",
-  "search_for_event": "إبحث عن المناسبة..."
+  "search_for_event": "إبحث عن المناسبة...",
+  "here": "هنا",
+  "this_is_your_event_location": "هذا هو موقع المناسبة."
 }

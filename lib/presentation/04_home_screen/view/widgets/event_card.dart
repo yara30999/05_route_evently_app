@@ -48,9 +48,8 @@ class _EventCardState extends State<EventCard> {
     final togglefavouriteProvider = context.read<LikeUnlikeProvider>();
     return GestureDetector(
       onTap: () {
-        //TODO
         Navigator.of(context)
-            .pushNamed(Routes.createEditEventRoute, arguments: widget.item);
+            .pushNamed(Routes.eventDetailsRoute, arguments: widget.item);
       },
       child: Container(
         height: 200,

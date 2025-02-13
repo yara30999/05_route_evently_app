@@ -92,6 +92,7 @@
   "event_description": "Event Description",
   "event_date": "Event Date",
   "event_time": "Event Time",
+  "event_details": "Event Details",
   "choose_date": "Choose Date",
   "choose_time": "Choose Time",
   "choose_location": "Choose Location",
@@ -112,5 +113,7 @@
   "welcome": "Welcome Back ✨",
   "no_events": "You didn't add any events here.",
   "failedToLoadEvents": "Failed to load events: {}",
-  "search_for_event": "Search for Event..."
+  "search_for_event": "Search for Event...",
+  "here": "here",
+  "this_is_your_event_location": "This is your event location."
 }

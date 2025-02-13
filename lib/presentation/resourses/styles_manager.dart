@@ -62,6 +62,14 @@ abstract class Styles {
       fontWeight: FontWeight.w700,
     );
   }
+
+  static TextStyle style24Medium() {
+    return TextStyle(
+      fontFamily: FontConstants.fontInter,
+      fontSize: 24,
+      fontWeight: FontWeight.w500,
+    );
+  }
 }
 
 // sacleFactor
