@@ -4,6 +4,7 @@ import '../../../../app/extentions.dart';
 import '../../../../app/functions.dart';
 import '../../../../domain/entities/event_entity.dart';
 import '../../../resourses/colors_manager.dart';
+import '../../../resourses/routes_manager.dart';
 import '../../../resourses/styles_manager.dart';
 import '../../view_model/like_unlike_provider.dart';
 
@@ -48,10 +49,8 @@ class _EventCardState extends State<EventCard> {
     return GestureDetector(
       onTap: () {
         //TODO
-        // Navigator.of(context).pushNamed(
-        //   Routes.eventDetailsRoute,
-        //   arguments: widget.item,
-        // );
+        Navigator.of(context)
+            .pushNamed(Routes.createEditEventRoute, arguments: widget.item);
       },
       child: Container(
         height: 200,

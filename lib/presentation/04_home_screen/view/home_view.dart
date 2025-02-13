@@ -58,7 +58,7 @@ class _HomeViewState extends State<HomeView> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, Routes.createEventRoute);
+          Navigator.pushNamed(context, Routes.createEditEventRoute);
         },
         child: Icon(
           Icons.add,

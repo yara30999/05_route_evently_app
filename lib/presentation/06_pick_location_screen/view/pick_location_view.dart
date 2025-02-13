@@ -2,12 +2,12 @@ import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import '../../05_create_event_screen/view_model/create_event_provider.dart';
+import '../../05_create_edit_event_screen/view_model/create_edit_event_provider.dart';
 import '../../resourses/colors_manager.dart';
 import '../../resourses/styles_manager.dart';
 
 class PickLocationView extends StatefulWidget {
-  final CreateEventProvider provider;
+  final CreateEditEventProvider provider;
   const PickLocationView({super.key, required this.provider});
 
   @override

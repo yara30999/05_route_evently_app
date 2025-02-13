@@ -7,7 +7,7 @@ import '../../../../app/functions.dart';
 import '../../../resourses/assets_manager.dart';
 import '../../../resourses/colors_manager.dart';
 import '../../../resourses/styles_manager.dart';
-import '../../view_model/create_event_provider.dart';
+import '../../view_model/create_edit_event_provider.dart';
 
 class PickerRow extends StatelessWidget {
   final EventPicker eventPicker;
@@ -45,7 +45,7 @@ class PickerRow extends StatelessWidget {
                     Duration(days: 365),
                   ));
               if (chosenDate != null && context.mounted) {
-                Provider.of<CreateEventProvider>(context, listen: false)
+                Provider.of<CreateEditEventProvider>(context, listen: false)
                     .onDateSelection(chosenDate);
               }
             } else {
@@ -54,16 +54,16 @@ class PickerRow extends StatelessWidget {
                 initialTime: TimeOfDay.now(),
               );
               if (chosenTime != null && context.mounted) {
-                Provider.of<CreateEventProvider>(context, listen: false)
+                Provider.of<CreateEditEventProvider>(context, listen: false)
                     .onTimeSelection(chosenTime);
               }
             }
           },
           child: Text(
             eventPicker == EventPicker.date
-                ? context.watch<CreateEventProvider>().formattedDate ??
+                ? context.watch<CreateEditEventProvider>().formattedDate ??
                     'choose_date'.tr()
-                : context.watch<CreateEventProvider>().formattedTime ??
+                : context.watch<CreateEditEventProvider>().formattedTime ??
                     "choose_time".tr(),
             style: Styles.style16Medium().copyWith(color: ColorsManager.blue),
           ),

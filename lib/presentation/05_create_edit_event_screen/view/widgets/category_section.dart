@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../app/extentions.dart';
 import '../../../resourses/language_manager.dart';
-import '../../view_model/create_event_provider.dart';
+import '../../view_model/create_edit_event_provider.dart';
 import 'category_item.dart';
 
 class CategorySection extends StatelessWidget {
@@ -10,7 +10,7 @@ class CategorySection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int activeIndex = context.watch<CreateEventProvider>().categoryIndex;
+    int activeIndex = context.watch<CreateEditEventProvider>().categoryIndex!;
     return SizedBox(
       height: 50,
       child: ListView.builder(
@@ -24,7 +24,7 @@ class CategorySection extends StatelessWidget {
             return GestureDetector(
               onTap: () async {
                 if (activeIndex != actualIndex) {
-                  Provider.of<CreateEventProvider>(context, listen: false)
+                  Provider.of<CreateEditEventProvider>(context, listen: false)
                       .onCategorySelection(actualIndex);
                 }
               },
@@ -36,7 +36,7 @@ class CategorySection extends StatelessWidget {
                         LocalizationUtils.isCurrentLocalAr(context) ? 10 : 0.0),
                 child: CategoryItem(
                   isActive:
-                      context.watch<CreateEventProvider>().categoryIndex ==
+                      context.watch<CreateEditEventProvider>().categoryIndex ==
                           actualIndex,
                   categoryItem: CategoryItems.values[actualIndex],
                 ),

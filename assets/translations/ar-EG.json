@@ -96,6 +96,8 @@
   "choose_time": "إختر الوقت",
   "choose_location": "إختر الموقع",
   "add_event": "أضف المناسبة",
+  "edit_event": "عدل المناسبة",
+  "update_event": "عدل المناسبة",
   "location_services_disabled": "خدمات الموقع معطلة.",
   "location_permissions_denied": "تم رفض أذونات الموقع",
   "location_permissions_permanently_denied": "تم رفض أذونات الموقع نهائيًا، لا يمكننا طلب الأذونات.",

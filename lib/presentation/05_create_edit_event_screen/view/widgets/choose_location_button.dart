@@ -7,7 +7,7 @@ import '../../../resourses/assets_manager.dart';
 import '../../../resourses/colors_manager.dart';
 import '../../../resourses/routes_manager.dart';
 import '../../../resourses/styles_manager.dart';
-import '../../view_model/create_event_provider.dart';
+import '../../view_model/create_edit_event_provider.dart';
 
 class ChooseLocationButton extends StatelessWidget {
   const ChooseLocationButton({
@@ -16,17 +16,19 @@ class ChooseLocationButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var provider = context.watch<CreateEventProvider>();
+    var provider = context.watch<CreateEditEventProvider>();
     var locationLabel = provider.selectedLocation == null
         ? null
         : 'Lat: ${provider.selectedLocation!.latitude.floorToDouble()} Lng: ${provider.selectedLocation!.longitude.floorToDouble()}';
     return OutlinedButton(
         onPressed: () async {
           try {
-            await context.read<CreateEventProvider>().getCurrentUserLocation();
+            await context
+                .read<CreateEditEventProvider>()
+                .getCurrentUserLocation();
             if (context.mounted) {
               Navigator.pushNamed(context, Routes.pickLocationRoute,
-                  arguments: context.read<CreateEventProvider>());
+                  arguments: context.read<CreateEditEventProvider>());
             }
           } catch (e) {
             if (context.mounted) {

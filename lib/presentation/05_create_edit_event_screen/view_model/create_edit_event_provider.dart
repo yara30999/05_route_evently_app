@@ -5,26 +5,36 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../../app/extentions.dart';
 import '../../../domain/usecase/add_event_usecase.dart';
 
-class CreateEventProvider extends ChangeNotifier {
+class CreateEditEventProvider extends ChangeNotifier {
   final AddEventUsecase _addEventUsecase;
 
-  CreateEventProvider(this._addEventUsecase);
+  CreateEditEventProvider(this._addEventUsecase,
+      {this.categoryIndex,
+      this.categoryItem,
+      this.formattedDate,
+      this.formattedTime,
+      this.selectedLocation}) {
+    categoryIndex = categoryIndex ?? 1;
+    categoryItem = categoryItem ?? CategoryItems.values[1];
+  }
 
-  int categoryIndex = 1;
-  CategoryItems categoryItem = CategoryItems.values[1];
+  int? categoryIndex;
+  CategoryItems? categoryItem;
   String? formattedDate;
   String? formattedTime;
   LatLng? currentUserLocation;
   LatLng? selectedLocation;
 
-  bool _isLoading = false;
+  bool _createLoading = false;
+  bool _updateLoading = false;
   String? _errorMessage;
 
-  bool get isLoading => _isLoading;
+  bool get createLoading => _createLoading;
+  bool get updateLoading => _updateLoading;
   String? get errorMessage => _errorMessage;
 
   void _setLoading(bool value) {
-    _isLoading = value;
+    _createLoading = value;
     notifyListeners();
   }
 
@@ -43,7 +53,7 @@ class CreateEventProvider extends ChangeNotifier {
       return; //break the function.
     }
     var result = await _addEventUsecase.execute(AddEventUseCaseInput(
-        categoryIndex,
+        categoryIndex!,
         title,
         description,
         formattedDate!,

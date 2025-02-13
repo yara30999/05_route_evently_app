@@ -96,6 +96,8 @@
   "choose_time": "Choose Time",
   "choose_location": "Choose Location",
   "add_event": "Add Event",
+  "edit_event": "Edit Event",
+  "update_event": "Update Event",
   "location_services_disabled": "Location services are disabled.",
   "location_permissions_denied": "Location permissions are denied",
   "location_permissions_permanently_denied": "Location permissions are permanently denied, we cannot request permissions.",
