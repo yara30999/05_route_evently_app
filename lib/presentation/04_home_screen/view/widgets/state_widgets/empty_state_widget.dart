@@ -16,7 +16,7 @@ class EmptyStateWidget extends StatelessWidget {
         SizedBox(height: 30.0),
         Text(
           label,
-          style: Styles.style14Medium(),
+          style: Styles.style20Bold(),
         ),
         Lottie.asset(
           JsonAssets.empty,
