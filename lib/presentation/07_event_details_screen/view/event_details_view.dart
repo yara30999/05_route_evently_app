@@ -1,12 +1,15 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 import '../../../app/extentions.dart';
+import '../../../app/functions.dart';
 import '../../../domain/entities/event_entity.dart';
 import '../../resourses/assets_manager.dart';
 import '../../resourses/colors_manager.dart';
 import '../../resourses/routes_manager.dart';
 import '../../resourses/styles_manager.dart';
+import '../view_model/delete_event_provider.dart';
 import 'widgets/custom_rounded_button.dart';
 import 'widgets/google_maps_with_location.dart';
 
@@ -16,6 +19,7 @@ class EventDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final deleteEventProvider = context.read<DeleteEventProvider>();
     var dateString = eventEntity.date.toLongMonthFormat(context);
     var timeString = eventEntity.time;
     var locationString =
@@ -34,7 +38,20 @@ class EventDetailsView extends StatelessWidget {
               icon: SvgPicture.asset(SvgAssets.edit)),
           IconButton(
               onPressed: () {
-                //TODO delete event here ;)
+                deleteEventProvider.toggle(eventId: eventEntity.id).then((_) {
+                  if ( //loading has stopped
+                      !deleteEventProvider.isLoading &&
+                          // and we have error message .
+                          deleteEventProvider.errorMessage != null &&
+                          //context still in the rendering tree
+                          context.mounted) {
+                    showSnakBar(context, deleteEventProvider.errorMessage!);
+                  }
+                });
+                if (context.mounted) {
+                  Navigator.pop(context);
+                  showSnakBar(context, 'event_deleted'.tr());
+                }
               },
               icon: SvgPicture.asset(SvgAssets.delete)),
         ],

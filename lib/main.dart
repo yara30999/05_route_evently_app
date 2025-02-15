@@ -12,6 +12,7 @@ import 'firebase_options.dart';
 import 'presentation/01_introduction_screen/view_model/theme_provider.dart';
 import 'presentation/03_auth_screen/view_model/auth_provider.dart';
 import 'presentation/04_home_screen/view_model/like_unlike_provider.dart';
+import 'presentation/07_event_details_screen/view_model/delete_event_provider.dart';
 import 'presentation/resourses/constants_manager.dart';
 import 'presentation/resourses/language_manager.dart';
 
@@ -47,6 +48,9 @@ void main() async {
         ),
         ChangeNotifierProvider(
           create: (context) => LikeUnlikeProvider(instance()),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => DeleteEventProvider(instance()),
         ),
         ChangeNotifierProvider(
           create: (context) => ThemeProvider(instance())..getTheme(),

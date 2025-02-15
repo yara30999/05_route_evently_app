@@ -18,4 +18,5 @@ abstract class Repository {
   Stream<List<EventEntity>> getEvents();
   Future<Either<Failure, bool>> toggleFavourite(
       UpdateLikeRequest updateLikeRequest);
+  Future<Either<Failure, bool>> deleteEvent(String eventId);
 }

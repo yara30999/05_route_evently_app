@@ -17,6 +17,7 @@ abstract class RemoteDataSource {
   Future<void> updateEvent(UpdateEventRequest updateEventRequest);
   Stream<List<EventResponse>> getEvents();
   Future<void> toggleFavourite(UpdateLikeRequest updateLikeRequest);
+  Future<void> deleteEvent(String eventId);
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -156,5 +157,11 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     await events
         .doc(updateLikeRequest.eventId)
         .update({'isLiked': updateLikeRequest.isLiked});
+  }
+
+  @override
+  Future<void> deleteEvent(String eventId) async {
+    //delete doc
+    await events.doc(eventId).delete();
   }
 }

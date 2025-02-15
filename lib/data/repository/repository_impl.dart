@@ -147,4 +147,14 @@ class RepositoryImpl implements Repository {
       return Left(ErrorHandler.handle(error).failure);
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> deleteEvent(String eventId) async {
+    try {
+      await _remoteDataSource.deleteEvent(eventId);
+      return const Right(true);
+    } catch (error) {
+      return Left(ErrorHandler.handle(error).failure);
+    }
+  }
 }
