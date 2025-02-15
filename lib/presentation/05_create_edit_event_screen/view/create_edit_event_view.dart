@@ -54,6 +54,7 @@ class _CreateEditEventViewState extends State<CreateEditEventView> {
         create: (context) => CreateEditEventProvider(
               instance(),
               instance(),
+              instance(),
               categoryIndex: categoryId,
               categoryItem: categoryItem,
               formattedDate: widget.eventEntity?.date,
@@ -139,7 +140,8 @@ class _CreateEditEventViewState extends State<CreateEditEventView> {
                                       : createEditEventProvider.updateEvent(
                                           widget.eventEntity!.id,
                                           titleController.text,
-                                          descriptionController.text);
+                                          descriptionController.text,
+                                          widget.eventEntity!.isLiked);
 
                                   action.then((_) {
                                     if (!createEditEventProvider.isLoading &&

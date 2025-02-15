@@ -108,15 +108,11 @@ class RepositoryImpl implements Repository {
   @override
   Future<Either<Failure, bool>> addEvent(
       AddEventRequest addEventRequest) async {
-    if (await _networkInfo.isConnected) {
-      try {
-        await _remoteDataSource.addEvent(addEventRequest);
-        return const Right(true);
-      } catch (error) {
-        return Left(ErrorHandler.handle(error).failure);
-      }
-    } else {
-      return Left(DataSource.noInternetConnection.getFailure());
+    try {
+      await _remoteDataSource.addEvent(addEventRequest);
+      return const Right(true);
+    } catch (error) {
+      return Left(ErrorHandler.handle(error).failure);
     }
   }
 
@@ -133,30 +129,22 @@ class RepositoryImpl implements Repository {
   @override
   Future<Either<Failure, bool>> toggleFavourite(
       UpdateLikeRequest updateLikeRequest) async {
-    if (await _networkInfo.isConnected) {
-      try {
-        await _remoteDataSource.toggleFavourite(updateLikeRequest);
-        return const Right(true);
-      } catch (error) {
-        return Left(ErrorHandler.handle(error).failure);
-      }
-    } else {
-      return Left(DataSource.noInternetConnection.getFailure());
+    try {
+      await _remoteDataSource.toggleFavourite(updateLikeRequest);
+      return const Right(true);
+    } catch (error) {
+      return Left(ErrorHandler.handle(error).failure);
     }
   }
 
   @override
   Future<Either<Failure, bool>> updateEvent(
       UpdateEventRequest updateEventRequest) async {
-    if (await _networkInfo.isConnected) {
-      try {
-        await _remoteDataSource.updateEvent(updateEventRequest);
-        return const Right(true);
-      } catch (error) {
-        return Left(ErrorHandler.handle(error).failure);
-      }
-    } else {
-      return Left(DataSource.noInternetConnection.getFailure());
+    try {
+      await _remoteDataSource.updateEvent(updateEventRequest);
+      return const Right(true);
+    } catch (error) {
+      return Left(ErrorHandler.handle(error).failure);
     }
   }
 }

@@ -28,11 +28,4 @@ class LoveTabProvider extends ChangeNotifier {
       }
     });
   }
-
-  // Stream<List<EventEntity>> streamEvents() {
-  //   return eventsUsecase.execute().map((events) {
-  //     // filteration based on favourites
-  //     return events.where((event) => event.isLiked == true).toList();
-  //   });
-  // }
 }

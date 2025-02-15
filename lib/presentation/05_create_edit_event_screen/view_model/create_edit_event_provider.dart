@@ -3,14 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../../app/extentions.dart';
+import '../../../data/network/network_info.dart';
 import '../../../domain/usecase/add_event_usecase.dart';
 import '../../../domain/usecase/update_event_usecase.dart';
 
 class CreateEditEventProvider extends ChangeNotifier {
+  final NetworkInfo _networkInfo;
   final AddEventUsecase _addEventUsecase;
   final UpdateEventUsecase _updateEventUsecase;
 
-  CreateEditEventProvider(this._addEventUsecase, this._updateEventUsecase,
+  CreateEditEventProvider(
+      this._networkInfo, this._addEventUsecase, this._updateEventUsecase,
       {this.categoryIndex,
       this.categoryItem,
       this.formattedDate,
@@ -52,6 +55,10 @@ class CreateEditEventProvider extends ChangeNotifier {
       _setLoading(false);
       return; //break the function.
     }
+    bool isConnected = await _networkInfo.isConnected;
+    if (!isConnected) {
+      _setLoading(false);
+    }
     var result = await _addEventUsecase.execute(AddEventUseCaseInput(
         categoryIndex!,
         title,
@@ -70,7 +77,7 @@ class CreateEditEventProvider extends ChangeNotifier {
   }
 
   Future<void> updateEvent(
-      String eventId, String title, String description) async {
+      String eventId, String title, String description, bool isLiked) async {
     _setLoading(true);
     formattedDate ??= DateFormat('dd/MM/yyyy').format(DateTime.now());
     formattedTime ??= DateFormat('hh:mm a').format(DateTime.now());
@@ -78,6 +85,10 @@ class CreateEditEventProvider extends ChangeNotifier {
       _setErrorMessage('you_have_to_pick_location'.tr());
       _setLoading(false);
       return; //break the function.
+    }
+    bool isConnected = await _networkInfo.isConnected;
+    if (!isConnected) {
+      _setLoading(false);
     }
     var result = await _updateEventUsecase.execute(UpdateEventUseCaseInput(
         eventId,
@@ -88,7 +99,7 @@ class CreateEditEventProvider extends ChangeNotifier {
         formattedTime!,
         selectedLocation?.latitude ?? 22.0, //for more protection
         selectedLocation?.longitude ?? 21.0, //for more protection
-        false));
+        isLiked));
     result.fold((failure) {
       _setErrorMessage('${failure.message} ${failure.code}');
     }, (isSuceess) {

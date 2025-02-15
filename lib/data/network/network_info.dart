@@ -2,6 +2,7 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 abstract class NetworkInfo {
   Future<bool> get isConnected;
+  Stream<InternetConnectionStatus> get isConnectedStream;
 }
 
 class NetworkInfoImpl implements NetworkInfo {
@@ -11,4 +12,7 @@ class NetworkInfoImpl implements NetworkInfo {
 
   @override
   Future<bool> get isConnected => _internetConnectionChecker.hasConnection;
+  @override
+  Stream<InternetConnectionStatus> get isConnectedStream =>
+      _internetConnectionChecker.onStatusChange;
 }

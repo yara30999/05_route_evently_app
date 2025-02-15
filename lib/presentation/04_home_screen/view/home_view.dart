@@ -1,6 +1,12 @@
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
+import '../../../app/di.dart';
+import '../../../data/network/network_info.dart';
 import '../../../domain/entities/bottom_nav_bar_entity.dart';
 import '../../resourses/assets_manager.dart';
 import '../../resourses/colors_manager.dart';
@@ -21,6 +27,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  late StreamSubscription<InternetConnectionStatus> networkSubscription;
   int _currentPage = 0;
   late PageController _pageController;
 
@@ -28,12 +35,24 @@ class _HomeViewState extends State<HomeView> {
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: _currentPage);
+    networkSubscription = instance<NetworkInfo>()
+        .isConnectedStream
+        .listen(_onInternetConnectionChanged);
   }
 
   @override
   void dispose() {
     _pageController.dispose();
+    networkSubscription.cancel();
     super.dispose();
+  }
+
+  void _onInternetConnectionChanged(InternetConnectionStatus status) {
+    if (status == InternetConnectionStatus.connected) {
+      FirebaseFirestore.instance.enableNetwork();
+    } else {
+      FirebaseFirestore.instance.disableNetwork();
+    }
   }
 
   List<BottomNavIconEntity> get _navigationItems => [
