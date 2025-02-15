@@ -101,7 +101,7 @@ extension NonNullString on String? {
       ],
     };
 
-    return months[isArabic]?.elementAt(month - 1) ?? months['en']![month - 1];
+    return months[isArabic]?.elementAt(month - 1) ?? months[false]![month - 1];
   }
 }
 
