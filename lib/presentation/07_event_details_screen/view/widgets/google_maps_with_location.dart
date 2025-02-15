@@ -18,7 +18,7 @@ class GoogleMapWithLocaion extends StatefulWidget {
 }
 
 class _GoogleMapWithLocaionState extends State<GoogleMapWithLocaion> {
-  late final LatLng _userCurrentLocation;
+  late final LatLng _currentEventLocation;
   final Set<Marker> _markers = {};
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
@@ -34,11 +34,11 @@ class _GoogleMapWithLocaionState extends State<GoogleMapWithLocaion> {
   }
 
   void _addCurrentUserLocationAndMarker() {
-    _userCurrentLocation = LatLng(widget.lat, widget.lng);
+    _currentEventLocation = LatLng(widget.lat, widget.lng);
     _markers.add(
       Marker(
         markerId: MarkerId(UniqueKey().toString()),
-        position: _userCurrentLocation,
+        position: _currentEventLocation,
         infoWindow: InfoWindow(
           title: 'here'.tr(),
           snippet: 'this_is_your_event_location'.tr(),
@@ -62,7 +62,7 @@ class _GoogleMapWithLocaionState extends State<GoogleMapWithLocaion> {
           mapType: MapType.normal,
           onMapCreated: _onMapCreated,
           initialCameraPosition:
-              CameraPosition(target: _userCurrentLocation, zoom: 12),
+              CameraPosition(target: _currentEventLocation, zoom: 12),
           markers: _markers),
     );
   }

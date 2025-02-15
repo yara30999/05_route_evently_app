@@ -23,6 +23,14 @@ abstract class Styles {
     );
   }
 
+  static TextStyle style14Bold() {
+    return TextStyle(
+      fontFamily: FontConstants.fontInter,
+      fontSize: 14,
+      fontWeight: FontWeight.w700,
+    );
+  }
+
   static TextStyle style16Medium() {
     return TextStyle(
       fontFamily: FontConstants.fontInter,

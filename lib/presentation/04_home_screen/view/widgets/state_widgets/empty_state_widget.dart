@@ -5,7 +5,9 @@ import '../../../../resourses/styles_manager.dart';
 
 class EmptyStateWidget extends StatelessWidget {
   final String label;
-  const EmptyStateWidget({super.key, required this.label});
+  final double width;
+  const EmptyStateWidget(
+      {super.key, this.width = double.infinity, required this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class EmptyStateWidget extends StatelessWidget {
           ),
           Lottie.asset(
             JsonAssets.empty,
-            width: double.infinity,
+            width: width,
             fit: BoxFit.contain,
           ),
         ],
