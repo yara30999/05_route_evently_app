@@ -32,7 +32,7 @@ This application is developed for educational purposes. using clean architecture
 - **FireStore database:** store and retrieving users data using express queries.
 - **Client-Side Validation** on login, register, forgot password pages.
 - Real-time Updates via **Firestore Database.**
-- data caching for offline use via **Firebase**.
+- data caching for offline use via **Firebase, Hive, Shared Prefrences**.
 - Animations ( Lottie, Fading animatin on category section).
 - Custom Light/Dark Mode.
 - Modern UI with New Material Widgets (Followed the same Route figma design).
