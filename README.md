@@ -61,7 +61,7 @@ This application is developed for educational purposes. using clean architecture
 
 ## 🎥 App demo:
 
-[Click here to watch Evently demo.](https://drive.google.com/file/d/16QKxUysbybbw546vjebUOQHyuWRjNpXR/view?usp=drive_link)
+[Click here to watch Evently demo.](https://drive.google.com/file/d/1NeuNrT6vxMPf0fNVrT5Fx7XNE-d6k5Od/view?usp=sharing)
 
 ## 💬 Feedback and Suggestions:
 
