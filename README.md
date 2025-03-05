@@ -50,7 +50,7 @@ This application is developed for educational purposes. using clean architecture
 
 - Then clone the forked project by
 
-  `git clone github.com/<username>/cat_gallery`
+  `git clone github.com/<username>/05_route_evently_app`
 
 - once cloned, open this project in your favorite code-editor and run: `flutter pub get`
 - Wohoo!! now you can now run this project on your emulator or physical device just do `flutter run`
